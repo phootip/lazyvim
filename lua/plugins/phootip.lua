@@ -12,8 +12,8 @@ return {
   {
     "christoomey/vim-tmux-navigator",
   },
-	{
-		"machakann/vim-sandwich",
-		event = "VeryLazy",
-	},
+	-- {
+	-- 	"machakann/vim-sandwich",
+	-- 	event = "VeryLazy",
+	-- },
 }
