@@ -12,6 +12,7 @@ return {
   {
     "christoomey/vim-tmux-navigator",
   },
+  { "ThePrimeagen/harpoon",          branch = "harpoon2" },
 	-- {
 	-- 	"machakann/vim-sandwich",
 	-- 	event = "VeryLazy",
