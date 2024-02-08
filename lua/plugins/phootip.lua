@@ -13,8 +13,26 @@ return {
     "christoomey/vim-tmux-navigator",
   },
   { "ThePrimeagen/harpoon",          branch = "harpoon2" },
-	-- {
-	-- 	"machakann/vim-sandwich",
-	-- 	event = "VeryLazy",
-	-- },
+  {
+    "gennaro-tedesco/nvim-possession",
+    dependencies = {
+        "ibhagwan/fzf-lua",
+    },
+    config = true,
+    init = function()
+        local possession = require("nvim-possession")
+        vim.keymap.set("n", "<leader>ssl", function()
+            possession.list()
+        end)
+        vim.keymap.set("n", "<leader>ssn", function()
+            possession.new()
+        end)
+        vim.keymap.set("n", "<leader>ssu", function()
+            possession.update()
+        end)
+        vim.keymap.set("n", "<leader>ssd", function()
+            possession.delete()
+        end)
+    end,
+  }
 }
