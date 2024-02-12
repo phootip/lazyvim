@@ -21,20 +21,5 @@ return {
 			{ '<leader>qe', function() require("nvim-possession").list() end, silent = true, mode = { "n" }, desc = "Session Menu"},
 			{ '<leader>qn', function() require("nvim-possession").new() end, silent = true, mode = { 'n' }, desc = "New Session"},
     },
-    -- init = function()
-    --     local possession = require("nvim-possession")
-    --     vim.keymap.set("n", "<leader>qe", function()
-    --         possession.list()
-    --     end)
-    --     vim.keymap.set("n", "<leader>qn", function()
-    --         possession.new()
-    --     end)
-    --     vim.keymap.set("n", "<leader>Eu", function()
-    --         possession.update()
-    --     end)
-    --     vim.keymap.set("n", "<leader>Ed", function()
-    --         possession.delete()
-    --     end)
-    -- end,
   }
 }
