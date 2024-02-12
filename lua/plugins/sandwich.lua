@@ -3,10 +3,10 @@ return {
   {
     "machakann/vim-sandwich",
     event = "VeryLazy",
+    init = function()
+      vim.g.sandwich_no_default_key_mappings = 1
+    end,
     keys = {
-      -- { "gsa", "<Plug>(sandwich-add)", desc = "Sandwich Add" },
-      -- { "gsrb", "<Plug>(sandwich-delete-auto)", desc = "Sandwich Replace Auto" }
-
       { "gsa", "<Plug>(sandwich-add)", silent = true, mode = { "n", "x", "o" } },
       { "gsr", "<Plug>(sandwich-replace)", silent = true },
       { "gsrr", "<Plug>(sandwich-replace-auto)", silent = true },
