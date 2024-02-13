@@ -11,15 +11,5 @@
 return {
   { "christoomey/vim-tmux-navigator" },
   { "ThePrimeagen/harpoon",          branch = "harpoon2" },
-  {
-    "gennaro-tedesco/nvim-possession",
-    dependencies = {
-        "ibhagwan/fzf-lua",
-    },
-    config = true,
-    keys = {
-			{ '<leader>qe', function() require("nvim-possession").list() end, silent = true, mode = { "n" }, desc = "Session Menu"},
-			{ '<leader>qn', function() require("nvim-possession").new() end, silent = true, mode = { 'n' }, desc = "New Session"},
-    },
-  }
+  { "folke/persistence.nvim", enabled = false }
 }
