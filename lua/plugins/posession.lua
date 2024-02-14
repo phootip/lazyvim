@@ -17,18 +17,19 @@ return {
 			{ '<leader>qu', function() require("nvim-possession").update() end, silent = true, mode = { 'n' }, desc = "Update Session"},
     },
     -- config = true,
-    config = function()
+    init = function()
         require("nvim-possession").setup({
             autoload = true,
+            autosave = true,
             autoswitch = {
                 enable = true,
             },
-            save_hook = function()
-                vim.cmd([[ScopeSaveState]]) -- Scope.nvim saving
-            end,
-            post_hook = function()
-                vim.cmd([[ScopeLoadState]]) -- Scope.nvim loading
-            end,
+            -- save_hook = function()
+            --     vim.cmd([[ScopeSaveState]]) -- Scope.nvim saving
+            -- end,
+            -- post_hook = function()
+            --     vim.cmd([[ScopeLoadState]]) -- Scope.nvim loading
+            -- end,
         })
     end,
   }
