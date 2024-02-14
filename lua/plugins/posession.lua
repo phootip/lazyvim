@@ -5,11 +5,11 @@ return {
     lazy = false,
     dependencies = {
         {"ibhagwan/fzf-lua"},
-        {
-            "tiagovla/scope.nvim",
-            lazy = false,
-            config = true,
-        },
+        -- {
+        --     "tiagovla/scope.nvim",
+        --     lazy = false,
+        --     config = true,
+        -- },
     },
     keys = {
 			{ '<leader>qe', function() require("nvim-possession").list() end, silent = true, mode = { "n" }, desc = "Session Menu"},
@@ -17,7 +17,7 @@ return {
 			{ '<leader>qu', function() require("nvim-possession").update() end, silent = true, mode = { 'n' }, desc = "Update Session"},
     },
     -- config = true,
-    init = function()
+    config = function()
         require("nvim-possession").setup({
             autoload = true,
             autosave = true,
