@@ -1,5 +1,6 @@
 -- stylua: ignore
 return {
+  { "folke/persistence.nvim", enabled = false },
   {
     "gennaro-tedesco/nvim-possession",
     lazy = false,

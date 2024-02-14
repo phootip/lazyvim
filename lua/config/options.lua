@@ -14,3 +14,4 @@
 --   "globals",
 -- }
 vim.opt.cursorcolumn = true
+vim.opt.wrap = true
