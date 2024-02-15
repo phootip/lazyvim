@@ -8,7 +8,5 @@ return {
         return require("nvim-possession").status() ~= nil
       end,
     })
-    -- table.insert(opts.sections.lualine_b, function() return vim.fn.pw end)
-    table.insert(opts.sections.lualine_b, function() return vim.fn.getcwd() end)
   end,
 }
