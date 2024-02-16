@@ -1,3 +1,5 @@
+-- stylua: ignore
+if true then return {} end
 return {
   { "folke/persistence.nvim", enabled = false },
   {

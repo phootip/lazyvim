@@ -1,14 +1,17 @@
 -- stylua: ignore
-if true then return {} end
+-- if true then return {} end
 -- stylua: ignore
 return {
   { "folke/persistence.nvim", enabled = false },
   {
     "gennaro-tedesco/nvim-possession",
     lazy = false,
-    priority = 2000,
-    -- event = "VeryLazy",
+    -- priority = 2000,
     -- priority = 2,
+    -- event = "LazyVimStarted",
+    -- event = "BufReadPre",
+    -- event = "VimEnter",
+    -- event = "VeryLazy",
     -- event = "LazyVimStarted",
     dependencies = {
         {"ibhagwan/fzf-lua"},
@@ -33,6 +36,7 @@ return {
             end,
             post_hook = function()
                 vim.cmd([[ScopeLoadState]]) -- Scope.nvim loading
+                vim.opt.ch = 1
             end,
         })
     end,
