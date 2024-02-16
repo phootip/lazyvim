@@ -9,10 +9,3 @@ return {
     { "<leader>fB", "<cmd>Telescope scope buffers<cr>", desc = "All Buffers" },
   },
 }
-
--- return {
---   "backdround/tabscope.nvim",
---   init = function()
---     require("tabscope").setup({})
---   end,
--- }
