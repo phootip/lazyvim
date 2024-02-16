@@ -1,12 +1,18 @@
 -- stylua: ignore
+if true then return {} end
+-- stylua: ignore
 return {
   { "folke/persistence.nvim", enabled = false },
   {
     "gennaro-tedesco/nvim-possession",
     lazy = false,
+    priority = 2000,
+    -- event = "VeryLazy",
+    -- priority = 2,
+    -- event = "LazyVimStarted",
     dependencies = {
         {"ibhagwan/fzf-lua"},
-        {"phootip/scope.nvim"}
+        {"phootip/scope.nvim"},
     },
     keys = {
 			{ '<leader>qe', function() require("nvim-possession").list() end, silent = true, mode = { "n" }, desc = "Session Menu"},
@@ -16,7 +22,7 @@ return {
     -- config = true,
     config = function()
         require("nvim-possession").setup({
-            -- autoload = true,
+            autoload = true,
             autosave = true,
             autoswitch = {
                 enable = true,
