@@ -6,13 +6,6 @@ return {
   {
     "gennaro-tedesco/nvim-possession",
     lazy = false,
-    -- priority = 2000,
-    -- priority = 2,
-    -- event = "LazyVimStarted",
-    -- event = "BufReadPre",
-    -- event = "VimEnter",
-    -- event = "VeryLazy",
-    -- event = "LazyVimStarted",
     dependencies = {
         {"ibhagwan/fzf-lua"},
         {"phootip/scope.nvim"},
