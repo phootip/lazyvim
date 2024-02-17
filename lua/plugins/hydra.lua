@@ -18,9 +18,9 @@ return {
         { ".", require("smart-splits").resize_right, { desc = "Decrease window width" } },
         { ",", require("smart-splits").resize_left, { desc = "Increase window width" } },
 
-        { "<Up>", require("shade").brightness_up, { desc = "Increase window width" } },
-        { "<Down>", require("shade").brightness_down, { desc = "Increase window width" } },
-        { "b", require("shade").toggle, { desc = "Increase window width" } },
+        -- { "<Up>", require("shade").brightness_up, { desc = "Increase window width" } },
+        -- { "<Down>", require("shade").brightness_down, { desc = "Increase window width" } },
+        -- { "b", require("shade").toggle, { desc = "Increase window width" } },
       },
     })
     vim.keymap.set("n", "<leader>w_", "<C-W>s", { desc = "Split window below", remap = true })

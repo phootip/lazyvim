@@ -1,6 +1,7 @@
 return {
   {
     "folke/tokyonight.nvim",
+    enabled = false,
     opts = {
       on_colors = function(colors)
         colors.border = "#565f89"
@@ -8,14 +9,26 @@ return {
     },
   },
   {
-    "sunjon/Shade.nvim",
-    config = function()
-      require("shade").setup({
-        opts = {
-          overlay_opacity = 50,
-          opacity_step = 2,
-        },
-      })
+    "sontungexpt/witch",
+    priority = 1000,
+    lazy = false,
+    config = function(_, opts)
+      require("witch").setup(opts)
     end,
   },
+  {
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = "witch",
+    },
+  },
+  -- {
+  --   "sunjon/Shade.nvim",
+  --   config = function()
+  --     require("shade").setup({
+  --       overlay_opacity = 45,
+  --       opacity_step = 5,
+  --     })
+  --   end,
+  -- },
 }
