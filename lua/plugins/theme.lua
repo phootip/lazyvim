@@ -1,7 +1,6 @@
 return {
   {
     "folke/tokyonight.nvim",
-    enabled = false,
     opts = {
       on_colors = function(colors)
         colors.border = "#565f89"
@@ -9,26 +8,17 @@ return {
     },
   },
   {
-    "sontungexpt/witch",
-    priority = 1000,
-    lazy = false,
-    config = function(_, opts)
-      require("witch").setup(opts)
+    "levouh/tint.nvim",
+    -- opts = {
+    --   tint_background_colors = true,
+    -- },
+    config = function()
+      vim.keymap.set("n", "<leader>wb", function()
+        require("tint").toggle()
+      end, { desc = "Toggle background" })
+      require("tint").setup({
+        tint_background_colors = true,
+      })
     end,
   },
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "witch",
-    },
-  },
-  -- {
-  --   "sunjon/Shade.nvim",
-  --   config = function()
-  --     require("shade").setup({
-  --       overlay_opacity = 45,
-  --       opacity_step = 5,
-  --     })
-  --   end,
-  -- },
 }
