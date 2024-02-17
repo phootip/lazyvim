@@ -20,5 +20,6 @@ return {
       },
     })
     vim.keymap.set("n", "<leader>w_", "<C-W>s", { desc = "Split window below", remap = true })
+    vim.keymap.set("n", "<leader>bs", "<CMD>w<CR>", { desc = "Save", remap = true })
   end,
 }

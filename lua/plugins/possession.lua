@@ -21,7 +21,7 @@ return {
             autoload = true,
             autosave = true,
             autoswitch = {
-                enable = true,
+                enable = false,
             },
             save_hook = function()
                 vim.cmd([[ScopeSaveState]]) -- Scope.nvim saving

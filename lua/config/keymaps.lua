@@ -13,7 +13,7 @@ vim.keymap.set("n", "J", "<cmd>bprevious<cr>")
 vim.keymap.set("n", "]<Tab>", "<cmd>tabnext<cr>")
 vim.keymap.set("n", "[<Tab>", "<cmd>tabprevious<cr>")
 
-vim.keymap.del("n", "<leader>w-")
+-- vim.keymap.del("n", "<leader>w-")
 
 vim.keymap.set("x", "p", '""dP')
 vim.keymap.set("x", "<leader>p", "P")
