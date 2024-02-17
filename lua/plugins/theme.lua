@@ -1,12 +1,23 @@
 return {
+  -- {
+  --   "folke/tokyonight.nvim",
+  --   opts = {
+  --     on_colors = function(colors)
+  --       colors.border = "#565f89"
+  --     end,
+  --   },
+  -- },
+  -- { "ellisonleao/gruvbox.nvim" },
+  -- { "sainnhe/gruvbox-material" },
+  -- { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+  { "/rebelot/kanagawa.nvim", priority = 1000 },
   {
-    "folke/tokyonight.nvim",
+    "LazyVim/LazyVim",
     opts = {
-      on_colors = function(colors)
-        colors.border = "#565f89"
-      end,
+      colorscheme = "kanagawa",
     },
   },
+
   {
     "levouh/tint.nvim",
     -- opts = {
