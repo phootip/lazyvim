@@ -13,6 +13,12 @@ vim.keymap.set("n", "J", "<cmd>bprevious<cr>")
 vim.keymap.set("n", "]<Tab>", "<cmd>tabnext<cr>")
 vim.keymap.set("n", "[<Tab>", "<cmd>tabprevious<cr>")
 
-vim.keymap.set("x", "<leader>p", '""dP')
+-- vim.keymap.set("n", "<leader>w+", "<cmd>resize +2<cr>", { desc = "Increase window height" })
+-- vim.keymap.set("n", "<leader>w-", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
+-- vim.keymap.set("n", "<leader>w<", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
+-- vim.keymap.set("n", "<leader>w>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
+
+vim.keymap.set("x", "p", '""dP')
+vim.keymap.set("x", "<leader>p", "P")
 vim.keymap.set({ "n", "x" }, "x", '"_x')
 vim.keymap.set("n", "dx", '""dd')

@@ -3,6 +3,7 @@
 -- Add any additional options here
 vim.opt.cursorcolumn = true
 vim.opt.wrap = true
+vim.opt.scrolloff = 8
 
 function dump(o)
   if type(o) == "table" then

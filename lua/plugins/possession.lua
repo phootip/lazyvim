@@ -29,7 +29,6 @@ return {
             end,
             post_hook = function()
                 vim.cmd([[ScopeLoadState]]) -- Scope.nvim loading
-                vim.opt.ch = 1
             end,
         })
     end,
