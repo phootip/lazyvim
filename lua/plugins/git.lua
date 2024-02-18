@@ -41,4 +41,38 @@ return {
     },
     config = true,
   },
+  -- {
+  --   "lewis6991/gitsigns.nvim",
+  --   -- opts = {
+  --   --   preview_config = {},
+  --   -- },
+  --   keys = {
+  --     { "<leader>gp", require("gitsigns").preview_hunk, silent = true, mode = { "n" }, desc = "Git open diff" },
+  --   },
+  -- },
+  -- {
+  --   "tanvirtin/vgit.nvim",
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --   },
+  --   opts = {
+  --     settings = {
+  --       scene = {
+  --         diff_preference = "split",
+  --         keymaps = {
+  --           quit = "q",
+  --         },
+  --       },
+  --     },
+  --   },
+  --   keys = {
+  --     {
+  --       "<leader>gp",
+  --       "<CMD>VGit buffer_hunk_preview<CR>",
+  --       silent = true,
+  --       mode = { "n" },
+  --       desc = "Git file history",
+  --     },
+  --   },
+  -- },
 }
