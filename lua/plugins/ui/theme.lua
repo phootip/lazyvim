@@ -25,19 +25,29 @@ return {
       colorscheme = "tokyonight",
     },
   },
-
   {
-    "levouh/tint.nvim",
-    -- opts = {
-    --   tint_background_colors = true,
-    -- },
-    config = function()
-      vim.keymap.set("n", "<leader>wb", function()
-        require("tint").toggle()
-      end, { desc = "Toggle background" })
-      require("tint").setup({
-        tint_background_colors = true,
-      })
-    end,
+    -- "miversen33/sunglasses.nvim",
+    "phootip/sunglasses.nvim",
+    lazy = false,
+    priority = 51,
+    config = {
+      excluded_highlights = {
+        "WinSeparator",
+        { "lualine_.*", glob = true },
+        { "Diff*", glob = true },
+      },
+    },
+    keys = {
+      {
+        "<leader>wb",
+        function()
+          vim.cmd("SunglassesEnableToggle")
+          vim.cmd("SunglassesOff")
+        end,
+        silent = true,
+        mode = { "n" },
+        desc = "Session Menu",
+      },
+    },
   },
 }
