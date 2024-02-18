@@ -18,6 +18,7 @@ return {
     keys = {
       { "<leader>gfh", "<CMD>DiffviewFileHistory %<CR>", silent = true, mode = { "n" }, desc = "Git file history" },
       { "<leader>gfH", "<CMD>DiffviewFileHistory<CR>", silent = true, mode = { "n" }, desc = "Git history" },
+      { "<leader>go", "<CMD>DiffviewOpen<CR>", silent = true, mode = { "n" }, desc = "Git open diff" },
     },
     opts = {
       enhanced_diff_hl = true,
