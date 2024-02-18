@@ -14,6 +14,14 @@ return {
     },
   },
   {
+    "rbong/vim-flog",
+    lazy = true,
+    cmd = { "Flog", "Flogsplit", "Floggit" },
+    dependencies = {
+      "tpope/vim-fugitive",
+    },
+  },
+  {
     "sindrets/diffview.nvim",
     keys = {
       { "<leader>gfh", "<CMD>DiffviewFileHistory %<CR>", silent = true, mode = { "n" }, desc = "Git file history" },
@@ -25,11 +33,12 @@ return {
     },
   },
   {
-    "rbong/vim-flog",
-    lazy = true,
-    cmd = { "Flog", "Flogsplit", "Floggit" },
+    "NeogitOrg/neogit",
     dependencies = {
-      "tpope/vim-fugitive",
+      "nvim-lua/plenary.nvim",
+      "sindrets/diffview.nvim",
+      "nvim-telescope/telescope.nvim",
     },
+    config = true,
   },
 }
