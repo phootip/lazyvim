@@ -21,7 +21,24 @@ return {
       { "<leader>gfh", "<CMD>DiffviewFileHistory %<CR>", silent = true, mode = { "n" }, desc = "Git file history" },
       { "<leader>gfH", "<CMD>DiffviewFileHistory<CR>", silent = true, mode = { "n" }, desc = "Git history" },
       { "<leader>gfd", "<CMD>DiffviewOpen<CR>", silent = true, mode = { "n" }, desc = "Git diff" },
+      { "<leader>gd", "<CMD>DiffviewOpen<CR>", silent = true, mode = { "n" }, desc = "Git diff" },
     },
+    config = function()
+      local actions = require("diffview.actions")
+      require("diffview").setup({
+        file_panel = {
+          listing_style = "list",
+        },
+        keymaps = {
+          file_panel = {
+            -- stylua: ignore start
+            -- { "n", "a", actions.stage_all, { desc = "Stage all entries" } },
+            { "n", "q", function() vim.cmd("tabclose") end, { desc = "Quit" } },
+            -- stylua: ignore end
+          },
+        },
+      })
+    end,
   },
   {
     "NeogitOrg/neogit",
@@ -31,9 +48,12 @@ return {
       "sindrets/diffview.nvim",
       "nvim-telescope/telescope.nvim",
     },
-    config = true,
+    opts = {
+      graph_style = "unicode",
+    },
+    -- config = true,
     keys = {
-      { "<leader>go", "<CMD>Neogit kind=auto<CR>", silent = true, mode = { "n" }, desc = "Neogit" },
+      { "<leader>go", "<CMD>Neogit<CR>", silent = true, mode = { "n" }, desc = "Neogit" },
     },
   },
   -- {

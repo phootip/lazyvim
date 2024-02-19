@@ -28,9 +28,10 @@ return {
   {
     -- "miversen33/sunglasses.nvim",
     "phootip/sunglasses.nvim",
+    enabled = false,
     lazy = false,
     priority = 51,
-    config = {
+    opts = {
       excluded_highlights = {
         "WinSeparator",
         { "lualine_.*", glob = true },
