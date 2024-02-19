@@ -5,6 +5,7 @@ return {
   {
     "gennaro-tedesco/nvim-possession",
     lazy = false,
+    enabled = false,
     dependencies = {
         {"ibhagwan/fzf-lua"},
         {"phootip/scope.nvim"},
