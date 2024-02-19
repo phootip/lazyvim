@@ -3,14 +3,6 @@ return {
     "tpope/vim-fugitive",
     keys = {
       { "<leader>gb", "<CMD>Git blame<CR>", silent = true, mode = { "n" }, desc = "Git blame" },
-      {
-        "<leader>gfd",
-        "yiw<CMD>TmuxNavigateUp<CR>:Gvdiffsplit <C-R>0<CR>",
-        silent = true,
-        mode = { "n" },
-        desc = "Git file diff",
-      },
-      { "<leader>gb", "<CMD>Git blame<CR>", silent = true, mode = { "n" }, desc = "Git blame" },
     },
   },
   {
@@ -23,23 +15,26 @@ return {
   },
   {
     "sindrets/diffview.nvim",
+    event = "VeryLazy",
     keys = {
+      { "<leader>gfh", ":DiffviewFileHistory<CR>", silent = true, mode = { "x" }, desc = "Git line history" },
       { "<leader>gfh", "<CMD>DiffviewFileHistory %<CR>", silent = true, mode = { "n" }, desc = "Git file history" },
       { "<leader>gfH", "<CMD>DiffviewFileHistory<CR>", silent = true, mode = { "n" }, desc = "Git history" },
-      { "<leader>go", "<CMD>DiffviewOpen<CR>", silent = true, mode = { "n" }, desc = "Git open diff" },
-    },
-    opts = {
-      enhanced_diff_hl = true,
+      { "<leader>gfd", "<CMD>DiffviewOpen<CR>", silent = true, mode = { "n" }, desc = "Git diff" },
     },
   },
   {
     "NeogitOrg/neogit",
+    event = "VeryLazy",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "sindrets/diffview.nvim",
       "nvim-telescope/telescope.nvim",
     },
     config = true,
+    keys = {
+      { "<leader>go", "<CMD>Neogit kind=auto<CR>", silent = true, mode = { "n" }, desc = "Neogit" },
+    },
   },
   -- {
   --   "lewis6991/gitsigns.nvim",

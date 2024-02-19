@@ -1,7 +1,7 @@
 -- stylua: ignore
 return {
   "phootip/scope.nvim",
-  init = function()
+  config = function()
     require("scope").setup({})
     require("telescope").load_extension("scope")
   end,
