@@ -1,0 +1,22 @@
+return {}
+-- return {
+--   "anuvyklack/hydra.nvim",
+--   config = function()
+--     local Hydra = require("hydra")
+--     Hydra({
+--       -- name = "Resize Window",
+--       hint = [[Modify Window]],
+--       config = { color = "pink", hint = { border = "double" } },
+--       mode = "n",
+--       body = "<leader>w",
+--       heads = {
+--         { "-", require("smart-splits").resize_down, { desc = "Window height up" } },
+--         { "=", require("smart-splits").resize_up, { desc = "Window height down" } },
+--         { ".", require("smart-splits").resize_right, { desc = "Decrease window width" } },
+--         { ",", require("smart-splits").resize_left, { desc = "Increase window width" } },
+--       },
+--     })
+--     vim.keymap.set("n", "<leader>w_", "<C-W>s", { desc = "Split window below", remap = true })
+--     vim.keymap.set("n", "<leader>bs", "<CMD>w<CR>", { desc = "Save", remap = true })
+--   end,
+-- }
