@@ -2,8 +2,9 @@
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
 vim.opt.cursorcolumn = true
-vim.opt.wrap = true
+-- vim.opt.wrap = true
 vim.opt.scrolloff = 8
+-- autoformat toggle <leader>uf
 
 function dump(o)
   if type(o) == "table" then

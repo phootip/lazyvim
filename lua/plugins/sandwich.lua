@@ -13,7 +13,7 @@ return {
       { "gsc", "<Plug>(sandwich-replace)", silent = true },
       { "gscc", "<Plug>(sandwich-replace-auto)", silent = true },
       { "gsd", "<Plug>(sandwich-delete)", silent = true },
-      { "gsdo", "<Plug>(sandwich-delete-auto)", silent = true },
+      { "gsdd", "<Plug>(sandwich-delete-auto)", silent = true },
       { "ir", "<Plug>(textobj-sandwich-auto-i)", silent = true, mode = { "x", "o" } },
       { "ab", "<Plug>(textobj-sandwich-auto-a)", silent = true, mode = { "x", "o" } },
     },
