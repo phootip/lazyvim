@@ -8,10 +8,11 @@ vim.keymap.set("", "<C-l>", ":TmuxNavigateRight<CR>", { silent = true })
 
 vim.keymap.set("", "H", "^")
 vim.keymap.set("", "L", "$")
-vim.keymap.set("n", "K", "<cmd>bnext<cr>")
-vim.keymap.set("n", "J", "<cmd>bprevious<cr>")
+vim.keymap.set("n", "K", "<cmd>BufferLineCycleNext<cr>")
+vim.keymap.set("n", "J", "<cmd>BufferLineCyclePrev<cr>")
 vim.keymap.set("n", "]<Tab>", "<cmd>tabnext<cr>")
 vim.keymap.set("n", "[<Tab>", "<cmd>tabprevious<cr>")
+vim.keymap.set("n", "<leader>.", "<cmd>@:<cr>")
 
 -- vim.keymap.del("n", "<leader>w-")
 
