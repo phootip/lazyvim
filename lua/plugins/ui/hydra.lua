@@ -16,10 +16,10 @@ return {
       mode = "n",
       body = "<leader>w",
       heads = {
-        { "-", require("smart-splits").resize_down, { desc = "Window height up" } },
-        { "=", require("smart-splits").resize_up, { desc = "Window height down" } },
-        { ".", require("smart-splits").resize_right, { desc = "Decrease window width" } },
-        { ",", require("smart-splits").resize_left, { desc = "Increase window width" } },
+        { "j", require("smart-splits").resize_down, { desc = "Window height up" } },
+        { "k", require("smart-splits").resize_up, { desc = "Window height down" } },
+        { "l", require("smart-splits").resize_right, { desc = "Decrease window width" } },
+        { "h", require("smart-splits").resize_left, { desc = "Increase window width" } },
 
         { "b", "<cmd>BufferLineMoveNext<cr>", { desc = "Buffer move right" } },
         { "B", "<cmd>BufferLineMovePrev<cr>", { desc = "Buffer move left" } },

@@ -16,7 +16,8 @@ vim.keymap.set("n", "<leader>.", "<cmd>@:<cr>")
 
 -- vim.keymap.del("n", "<leader>w-")
 
-vim.keymap.set("x", "p", '""dP')
-vim.keymap.set("x", "<leader>p", "P")
+vim.keymap.set("x", "p", "P")
+vim.keymap.set("x", "P", "p")
 vim.keymap.set({ "n", "x" }, "x", '"_x')
+vim.keymap.set({ "n", "x" }, "X", '"_X')
 vim.keymap.set("n", "dx", '""dd')
