@@ -19,11 +19,11 @@ local function copy_path(state)
   vim.ui.select({
     "1. Absolute path: " .. results[1],
     "2. Path relative to CWD: " .. results[2],
-    "2. Path with wild card: " .. results[3],
-    "3. Path relative to HOME: " .. results[4],
-    "4. Filename: " .. results[5],
-    "5. Filename without extension: " .. results[6],
-    "6. Extension of the filename: " .. results[7],
+    "3. Path with wild card: " .. results[3],
+    "4. Path relative to HOME: " .. results[4],
+    "5. Filename: " .. results[5],
+    "6. Filename without extension: " .. results[6],
+    "7. Extension of the filename: " .. results[7],
   }, { prompt = "Choose to copy to clipboard:" }, function(choice)
     if choice then
       local i = tonumber(choice:sub(1, 1))
