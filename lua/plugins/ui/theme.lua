@@ -16,8 +16,14 @@ return {
       end,
     },
   },
-  -- { "ellisonleao/gruvbox.nvim" },
-  -- { "sainnhe/gruvbox-material" },
+  {
+    "nvim-pack/nvim-spectre",
+    opts = {
+      highlight = {
+        search = "DiffAdd",
+      },
+    },
+  },
   -- { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
   -- { "/rebelot/kanagawa.nvim", priority = 1000 },
   {
