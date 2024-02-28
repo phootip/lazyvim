@@ -4,6 +4,7 @@
 vim.opt.cursorcolumn = true
 -- vim.opt.wrap = true
 vim.opt.scrolloff = 8
+vim.o.showtabline = 2
 -- autoformat toggle <leader>uf
 
 function dump(o)
