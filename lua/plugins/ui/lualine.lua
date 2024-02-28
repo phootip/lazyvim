@@ -8,5 +8,7 @@ return {
         return require("nvim-possession").status() ~= nil
       end,
     })
+    table.insert(opts.sections.lualine_x, 'filetype')
+    table.insert(opts.sections.lualine_x, 'fileformat')
   end,
 }
