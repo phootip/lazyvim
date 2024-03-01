@@ -93,9 +93,18 @@ return {
             return label
           end
 
+          local function get_modified()
+            if vim.bo[props.buf].modified then
+              return " "
+            else
+              return ""
+            end
+          end
+
           local buffer = {
             { get_diagnostic_label() },
             { get_git_diff() },
+            { get_modified() },
             { (ft_icon or "") .. " ", guifg = ft_color, guibg = "none" },
             { filename .. " ", gui = modified },
             { "┊  " .. vim.api.nvim_win_get_number(props.win), group = "DevIconWindows" },

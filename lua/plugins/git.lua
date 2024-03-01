@@ -40,22 +40,22 @@ return {
       })
     end,
   },
-  {
-    "NeogitOrg/neogit",
-    event = "VeryLazy",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "sindrets/diffview.nvim",
-      "nvim-telescope/telescope.nvim",
-    },
-    opts = {
-      graph_style = "unicode",
-    },
-    -- config = true,
-    keys = {
-      { "<leader>go", "<CMD>Neogit<CR>", silent = true, mode = { "n" }, desc = "Neogit" },
-    },
-  },
+  -- {
+  --   "NeogitOrg/neogit",
+  --   event = "VeryLazy",
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --     "sindrets/diffview.nvim",
+  --     "nvim-telescope/telescope.nvim",
+  --   },
+  --   opts = {
+  --     graph_style = "unicode",
+  --   },
+  --   -- config = true,
+  --   keys = {
+  --     { "<leader>go", "<CMD>Neogit<CR>", silent = true, mode = { "n" }, desc = "Neogit" },
+  --   },
+  -- },
   -- {
   --   "lewis6991/gitsigns.nvim",
   --   -- opts = {
