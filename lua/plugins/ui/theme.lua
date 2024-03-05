@@ -10,8 +10,13 @@ return {
           bg = "#2d4235",
         }
         hl.DiffText = {
-          -- bg = "#071975",
           bg = "#6e6746",
+        }
+        hl.CursorLine = {
+          bg = "#392747",
+        }
+        hl.CursorColumn = {
+          bg = "#392747",
         }
       end,
     },
