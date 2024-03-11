@@ -38,8 +38,8 @@ return {
     },
   },
   {
-    -- "miversen33/sunglasses.nvim",
-    "phootip/sunglasses.nvim",
+    "miversen33/sunglasses.nvim",
+    -- "phootip/sunglasses.nvim",
     -- enabled = false,
     lazy = false,
     priority = 51,
@@ -49,6 +49,7 @@ return {
         { "lualine_.*", glob = true },
         { "Diff*", glob = true },
       },
+      filter_percent = 0.40,
     },
     keys = {
       {
@@ -59,7 +60,7 @@ return {
         end,
         silent = true,
         mode = { "n" },
-        desc = "Session Menu",
+        desc = "Sunglasses Toggle",
       },
     },
   },
