@@ -29,14 +29,10 @@ return {
       },
     },
   },
+  -- { "LazyVim/LazyVim", opts = { colorscheme = "tokyonight" } },
   -- { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
-  -- { "/rebelot/kanagawa.nvim", priority = 1000 },
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "tokyonight",
-    },
-  },
+  { "rebelot/kanagawa.nvim", priority = 1000 },
+  { "LazyVim/LazyVim", opts = { colorscheme = "kanagawa" } },
   {
     "miversen33/sunglasses.nvim",
     -- "phootip/sunglasses.nvim",
