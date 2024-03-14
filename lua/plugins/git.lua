@@ -30,12 +30,18 @@ return {
           listing_style = "list",
         },
         keymaps = {
-          file_panel = {
-            -- stylua: ignore start
-            -- { "n", "a", actions.stage_all, { desc = "Stage all entries" } },
-            { "n", "q", function() vim.cmd("tabclose") end, { desc = "Quit" } },
-            -- stylua: ignore end
+          view = {
+            { { "n" }, "q", "<CMD>DiffviewClose<CR>", { silent = true } },
           },
+          -- stylua: ignore start
+          file_panel = {
+            -- { "n", "a", actions.stage_all, { desc = "Stage all entries" } },
+            { "n", "q", function() vim.cmd("DiffviewClose") end, { desc = "Quit" } },
+          },
+          file_history_panel = {
+            { "n", "q", function() vim.cmd("DiffviewClose") end, { desc = "Quit" } },
+          },
+          -- stylua: ignore end
         },
       })
     end,

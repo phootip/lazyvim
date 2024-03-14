@@ -3,7 +3,8 @@ local theme = {
   -- Also you can do this: fill = { fg='#f2e9de', bg='#907aa9', style='italic' }
   head = "TabLine",
   -- current_tab = 'TabLineSel',
-  current_tab = { fg = "#F8FBF6", bg = "#896a98", style = "italic" },
+  -- current_tab = { fg = "#F8FBF6", bg = "#896a98", style = "italic" },
+  current_tab = { fg = "#223249", bg = "#ff9e3b", style = "italic" },
   tab = "TabLine",
   win = "TabLine",
   tail = "TabLine",
