@@ -7,6 +7,7 @@ vim.opt.scrolloff = 8
 vim.o.showtabline = 2
 vim.opt.conceallevel = 1
 vim.opt.autoread = true
+vim.opt.timeoutlen = 1000
 -- autoformat toggle <leader>uf
 
 function dump(o)

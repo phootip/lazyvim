@@ -23,7 +23,8 @@ return {
 
       return {
         defaults = {
-          prompt_prefix = " ",
+          -- prompt_prefix = " ",
+          prompt_prefix = "",
           selection_caret = " ",
           -- open files in the first window that is an actual file.
           -- use the current window if no other window is available.
@@ -62,12 +63,13 @@ return {
         },
       }
     end,
+    keys = { { "<leader>/", "<CMD>Telescope egrepify<CR>", desc = "Grep (root dir)" } },
   },
   {
     "fdschmidt93/telescope-egrepify.nvim",
     dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
-    keys = {
-      { "<leader>/", "<CMD>Telescope egrepify<CR>", silent = true, mode = { "n" }, desc = "Grep group by file" },
-    },
+    -- keys = {
+    --   { "<leader>/", "<CMD>Telescope egrepify<CR>", silent = true, mode = { "n" }, desc = "Grep group by file" },
+    -- },
   },
 }

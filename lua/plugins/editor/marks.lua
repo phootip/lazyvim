@@ -11,6 +11,7 @@ return {
   event = "VeryLazy",
   opts = {
     default_mapping = false,
+    force_write_shada = true,
     -- builtin_marks = { "<", ">" },
     bookmark_0 = {
       sign = "⚑",
@@ -20,24 +21,25 @@ return {
       -- annotate = false,
     },
     mappings = {
-      -- toggle = "mm",
-      -- preview = "<leader>m.",
       preview = "m.",
-      next = "m]",
-      prev = "m[",
+      next = "mj",
+      prev = "mk",
+      toggle = "mm",
+      delete_line = "md",
+      -- next_bookmark0 = "m]",
+      -- prev_bookmark0 = "m[",
       -- set_bookmark0 = "mm",
-      delete_bookmark0 = "mc",
+      -- delete_bookmark0 = "mc",
     },
   },
   keys = {
     -- stylua: ignore start
     -- { 'ml', "<CMD>MarksQFListAll<CR>", silent = true, mode = { "n" }, desc = "Mark list"},
-    { 'mm', "<Plug>(Marks-toggle-bookmark0)", silent = true, mode = { "n" }, desc = "Mark list"},
-    -- 
-    { 'ml', function() vim.cmd("BookmarksQFListAll"); sortQF() end, silent = true, mode = { "n" }, desc = "Mark list"},
-    -- { 'ml', function() vim.cmd("BookmarksQFListAll") end, silent = true, mode = { "n" }, desc = "Mark list"},
+    -- { 'm]', "<Plug>(Marks-next)", silent = true, mode = { "n" }, desc = "Mark next"},
+    -- { 'm[', "<Plug>(Marks-prev)", silent = true, mode = { "n" }, desc = "Mark prev"},
+    -- { 'ml', function() vim.cmd("BookmarksQFListAll"); sortQF() end, silent = true, mode = { "n" }, desc = "Mark list"},
+    { 'ml', function() vim.cmd("MarksQFListAll"); sortQF() end, silent = true, mode = { "n" }, desc = "Mark list"},
     -- { 'ms', function() sortQF() end, silent = true, mode = { "n" }, desc = "Mark list"},
-    -- { 'mx', function() sortQFLine() end, silent = true, mode = { "n" }, desc = "Mark list"},
     -- stylua: ignore end
   },
 }
