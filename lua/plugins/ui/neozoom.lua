@@ -13,7 +13,7 @@ return {
       --   exclude_buftypes = {},
       -- },
       exclude_buftypes = { 'terminal' },
-      -- exclude_filetypes = { 'lspinfo', 'mason', 'lazy', 'fzf', 'qf' },
+      exclude_filetypes = { 'lspinfo', 'mason', 'lazy', 'fzf', 'qf', 'minifiles' },
       winopts = {
         offset = {
           -- NOTE: omit `top`/`left` to center the floating window vertically/horizontally.
@@ -41,6 +41,6 @@ return {
         },
       },
     }
-    vim.keymap.set('n', '<CR>', function () vim.cmd('NeoZoomToggle') end, { silent = true, nowait = true })
+    vim.keymap.set('n', '<leader>z', function () vim.cmd('NeoZoomToggle') end, { silent = true, nowait = true })
   end
 }

@@ -17,9 +17,10 @@ return {
       },
       mappings = {
         go_in = "",
-        go_in_plus = "L",
+        go_in_plus = "<CR>",
         go_out = "",
-        go_out_plus = "H",
+        go_out_plus = "<BS>",
+        reset = "-",
       },
     },
     keys = {
