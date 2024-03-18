@@ -8,6 +8,9 @@ vim.o.showtabline = 2
 vim.opt.conceallevel = 1
 vim.opt.autoread = true
 vim.opt.timeoutlen = 1000
+-- vim.opt.listchars = "eol:$,tab:>-,trail:~,extends:>,precedes:<"
+vim.opt.listchars = "tab:>-,trail:~,extends:>,precedes:<"
+
 -- autoformat toggle <leader>uf
 
 function dump(o)
