@@ -46,6 +46,21 @@ return {
       })
     end,
   },
+  {
+    {
+      "linrongbin16/gitlinker.nvim",
+      config = function()
+        require("gitlinker").setup()
+      end,
+      -- stylua: ignore start
+      keys = {
+        { "<leader>gy", "<CMD>GitLink current_branch<CR>", silent = true, mode = { "n", "x" }, desc = "Copy git link" },
+        { "<leader>gY", "<CMD>GitLink<CR>", silent = true, mode = { "n", "x" }, desc = "Copy git perma-link" },
+        { "<leader>go", "<CMD>GitLink! current_branch<CR>", silent = true, mode = { "n", "x" }, desc = "Open git link" },
+      },
+      -- stylua: ignore end
+    },
+  },
   -- {
   --   "NeogitOrg/neogit",
   --   event = "VeryLazy",
