@@ -58,7 +58,7 @@ return {
   },
   keys = {
     { "<leader>nd", "<CMD>ObsidianToday<CR>", silent = true, mode = { "n" }, desc = "Today note" },
-    { "<leader>nn", "<CMD>ObsidianNewDefaultTemplate<CR>", silent = true, mode = { "n" }, desc = "Today note" },
+    -- { "<leader>nn", "<CMD>ObsidianNewDefaultTemplate<CR>", silent = true, mode = { "n" }, desc = "Today note" },
     { "<leader>nt", "<CMD>ObsidianTemplate<CR>", silent = true, mode = { "n" }, desc = "Today note" },
   },
 }
