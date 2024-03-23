@@ -13,22 +13,6 @@ vim.opt.listchars = "tab:>-,trail:~,extends:>,precedes:<"
 
 -- autoformat toggle <leader>uf
 
-function openRepoNote()
-  local file_name = vim.fs.basename(vim.fn.getcwd())
-  local file_location = "~/phootip/personal/notes/2 repos/" .. file_name .. ".md"
-  local f = vim.fn.filereadable(vim.fn.expand(file_location))
-  vim.cmd("e " .. file_location)
-  if f == 0 then
-    vim.cmd("normal! ggO") -- add properties at the start
-    vim.cmd("ObsidianTemplate repo.md")
-    vim.cmd("normal! ddG") -- go to end of file
-    vim.api.nvim_set_current_line("# " .. file_name)
-    vim.cmd("normal! o") -- go to end of file
-    vim.cmd("w") -- go to end of file
-  end
-end
-vim.keymap.set("n", "<leader>nn", openRepoNote, { desc = "Open Repo Note" })
-
 function dump(o)
   if type(o) == "table" then
     local s = "{ "

@@ -15,6 +15,35 @@ return {
     opts = function(_, opts)
       table.insert(opts.sections.lualine_x, "filetype")
       table.insert(opts.sections.lualine_x, "fileformat")
+      opts.winbar = {
+        lualine_b = {
+          {
+            "filename",
+            path = 4,
+            symbols = {
+              modified = "", -- Text to show when the file is modified.
+            },
+          },
+        },
+        lualine_y = {
+          {
+            function()
+              return vim.fn.getcwd()
+            end,
+          },
+        },
+      }
+      opts.inactive_winbar = {
+        lualine_b = {
+          {
+            "filename",
+            path = 4,
+            symbols = {
+              modified = "", -- Text to show when the file is modified.
+            },
+          },
+        },
+      }
     end,
   },
   {
@@ -53,6 +82,7 @@ return {
   },
   {
     "b0o/incline.nvim",
+    enabled = false,
     config = function()
       require("incline").setup({
         render = function(props)

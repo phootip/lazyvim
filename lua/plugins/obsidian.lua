@@ -5,6 +5,21 @@ vim.api.nvim_create_user_command("ObsidianNewDefaultTemplate", function()
   vim.cmd("normal! ddG") -- go to end of file
 end, {})
 
+local function openRepoNote()
+  local file_name = vim.fs.basename(vim.fn.getcwd())
+  local file_location = "~/phootip/personal/notes/2 repos/" .. file_name .. ".md"
+  local f = vim.fn.filereadable(vim.fn.expand(file_location))
+  vim.cmd("e " .. file_location)
+  if f == 0 then
+    vim.cmd("normal! ggO") -- add properties at the start
+    vim.cmd("ObsidianTemplate repo.md")
+    vim.cmd("normal! ddG") -- go to end of file
+    vim.api.nvim_set_current_line("# " .. file_name)
+    vim.cmd("normal! o") -- go to end of file
+    vim.cmd("w") -- go to end of file
+  end
+end
+
 return {
   "epwalsh/obsidian.nvim",
   version = "*", -- recommended, use latest release instead of latest commit
@@ -58,7 +73,8 @@ return {
   },
   keys = {
     { "<leader>nd", "<CMD>ObsidianToday<CR>", silent = true, mode = { "n" }, desc = "Today note" },
-    -- { "<leader>nn", "<CMD>ObsidianNewDefaultTemplate<CR>", silent = true, mode = { "n" }, desc = "Today note" },
+    { "<leader>nn", "<CMD>ObsidianNewDefaultTemplate<CR>", silent = true, mode = { "n" }, desc = "Today note" },
+    { "<leader>nr", openRepoNote, silent = true, mode = { "n" }, desc = "Open Repo Note" },
     { "<leader>nt", "<CMD>ObsidianTemplate<CR>", silent = true, mode = { "n" }, desc = "Today note" },
   },
 }
