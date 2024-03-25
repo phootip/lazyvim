@@ -16,7 +16,7 @@ require("lazy").setup({
     -- { import = "lazyvim.plugins.extras.lang.markdown" },
     { import = "lazyvim.plugins.extras.lang.terraform" },
     -- { import = "lazyvim.plugins.extras.editor.navic" },
-    { import = "lazyvim.plugins.extras.coding.yanky" },
+    -- { import = "lazyvim.plugins.extras.coding.yanky" },
     -- import/override with your plugins
     { import = "plugins" },
     { import = "plugins.ui" },

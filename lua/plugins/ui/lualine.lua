@@ -17,12 +17,15 @@ return {
       table.insert(opts.sections.lualine_x, "fileformat")
       opts.winbar = {
         lualine_b = {
+          -- {
+          --   "filename",
+          --   path = 4,
+          --   symbols = {
+          --     modified = "", -- Text to show when the file is modified.
+          --   },
+          -- },
           {
-            "filename",
-            path = 4,
-            symbols = {
-              modified = "", -- Text to show when the file is modified.
-            },
+            require("lazyvim.util").lualine.pretty_path(),
           },
         },
         lualine_y = {
@@ -35,13 +38,7 @@ return {
       }
       opts.inactive_winbar = {
         lualine_b = {
-          {
-            "filename",
-            path = 4,
-            symbols = {
-              modified = "", -- Text to show when the file is modified.
-            },
-          },
+          { require("lazyvim.util").lualine.pretty_path() },
         },
       }
     end,
