@@ -1,6 +1,6 @@
 return {
   "ahmedkhalf/project.nvim",
-  opts = {},
+  opts = { manual_mode = true, ignore_lsp = { "terraform" }, patterns = {} },
   event = "VeryLazy",
   config = function(_, opts)
     require("project_nvim").setup(opts)
