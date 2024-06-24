@@ -4,10 +4,12 @@
 vim.opt.cursorcolumn = true
 -- vim.opt.wrap = true
 vim.opt.scrolloff = 8
-vim.o.showtabline = 2
+vim.opt.showtabline = 2
 vim.opt.conceallevel = 1
 vim.opt.autoread = true
 vim.opt.timeoutlen = 1000
+-- vim.opt.foldmethod = "indent"
+-- vim.opt.foldtext = "v:lua.require'lazyvim.util'.ui.foldtext()"
 -- vim.opt.listchars = "eol:$,tab:>-,trail:~,extends:>,precedes:<"
 vim.opt.listchars = "tab:>-,trail:~,extends:>,precedes:<"
 
