@@ -1,6 +1,7 @@
 -- stylua: ignore
 return {
   'nyngwang/NeoZoom.lua',
+  enabled = false,
   config = function ()
     require('neo-zoom').setup {
       popup = { enabled = true }, -- this is the default.

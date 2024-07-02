@@ -29,4 +29,15 @@ vim.keymap.set("n", "<leader>tr", "<cmd>TabRename <cr>")
 
 vim.keymap.set("n", "<leader>.", "<cmd>@:<cr>")
 
+-- terminal
+vim.api.nvim_del_keymap("t", "<Esc><Esc>")
+vim.keymap.set({ "t" }, "<esc>", "<c-\\><c-n>")
+vim.keymap.set({ "n" }, "q", function()
+  if vim.bo.buftype == "terminal" then
+    vim.api.nvim_feedkeys("i", "n", true)
+  else
+    vim.api.nvim_feedkeys("q", "n", true)
+  end
+end)
+
 -- vim.keymap.del("n", "<leader>w-")
