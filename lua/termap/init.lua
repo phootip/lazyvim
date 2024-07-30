@@ -36,16 +36,22 @@ end
 
 M.open = function()
   print("Start")
-  local buf = vim.api.nvim_get_current_buf()
-  local texts = vim.api.nvim_buf_get_lines(buf, 0, -1, true)
+  local parent_buf = vim.api.nvim_get_current_buf()
+  local texts = vim.api.nvim_buf_get_lines(parent_buf, 0, -1, true)
   local mem = {}
   for i, text in ipairs(texts) do
     if string.find(text, "function") then
-      mem[#mem + 1] = i .. ":" .. text
+      mem[#mem + 1] = "line: " .. i .. string.rep(" ", (6 - string.len(i))) .. "| " .. text
     end
   end
   vim.cmd("vnew")
+  local tmp_buf = vim.api.nvim_get_current_buf()
+  -- print(parent_buf, tmp_buf)
+  vim.bo.buftype = "nofile"
+  vim.bo.buflisted = false
+  vim.bo.filetype = "termap"
   vim.api.nvim_buf_set_lines(0, 0, -1, false, mem)
+  vim.api.nvim_set_option_value("modifiable", false, { buf = tmp_buf })
 end
 
 M.clear = function()
