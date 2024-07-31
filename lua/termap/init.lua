@@ -72,6 +72,7 @@ M.refresh = function()
   M.search()
   M.update()
 end
+
 M.update = function()
   local buf_a = vim.api.nvim_get_current_buf()
   local buf_b = state.buf_mapping[buf_a]
@@ -130,10 +131,10 @@ M.search = function()
 end
 
 -- stylua: ignore start
-vim.keymap.set("n", "<leader>j", function() M.toggle() end)
-vim.keymap.set("n", "<leader>k", function()
-  local cmds = vim.api.nvim_get_autocmds({group = "termap"})
-  print(dump(cmds))
-end)
+vim.keymap.set("n", "<leader>tm", function() M.toggle() end)
+-- vim.keymap.set("n", "<leader>k", function()
+--   local cmds = vim.api.nvim_get_autocmds({group = "termap"})
+--   print(dump(cmds))
+-- end)
 
 return M
