@@ -44,6 +44,7 @@ M.open = function()
     buffer = buf_a,
     callback = M.update,
   })
+  print(dump(vim.api.nvim_get_autocmds({ group = "termap" })))
 end
 
 M.close = function()
@@ -78,6 +79,7 @@ M.update = function()
   local buf_b = state.buf_mapping[buf_a]
 
   if not buf_b then
+    print("can't find buf_b!")
     return
   end
 
@@ -119,6 +121,10 @@ end
 M.search = function()
   local buf_a = vim.api.nvim_get_current_buf()
   local buf_b = state.buf_mapping[buf_a]
+  if not buf_b then
+    print("can't find buf_b!")
+    return
+  end
   local lines = vim.api.nvim_buf_get_lines(buf_a, 0, -1, true)
   local mem = {}
   for i, line in ipairs(lines) do
