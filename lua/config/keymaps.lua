@@ -13,6 +13,8 @@ vim.keymap.set({ "n", "x", "i" }, "<C-h>", "<CMD>TmuxNavigateLeft<CR>", { silent
 vim.keymap.set({ "n", "x", "i" }, "<C-j>", "<CMD>TmuxNavigateDown<CR>", { silent = true })
 vim.keymap.set({ "n", "x", "i" }, "<C-k>", "<CMD>TmuxNavigateUp<CR>", { silent = true })
 vim.keymap.set({ "n", "x", "i" }, "<C-l>", "<CMD>TmuxNavigateRight<CR>", { silent = true })
+vim.keymap.set({ "n", "x", "i" }, "<M-j>", "<cmd>tabp<cr>")
+vim.keymap.set({ "n", "x", "i" }, "<M-k>", "<cmd>tabn<cr>")
 
 vim.keymap.set("", "H", "^")
 vim.keymap.set("", "L", "g_")
