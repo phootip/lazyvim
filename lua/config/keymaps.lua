@@ -13,8 +13,12 @@ vim.keymap.set({ "n", "x", "i" }, "<C-h>", "<CMD>TmuxNavigateLeft<CR>", { silent
 vim.keymap.set({ "n", "x", "i" }, "<C-j>", "<CMD>TmuxNavigateDown<CR>", { silent = true })
 vim.keymap.set({ "n", "x", "i" }, "<C-k>", "<CMD>TmuxNavigateUp<CR>", { silent = true })
 vim.keymap.set({ "n", "x", "i" }, "<C-l>", "<CMD>TmuxNavigateRight<CR>", { silent = true })
-vim.keymap.set({ "n", "x", "i" }, "<M-j>", "<cmd>tabp<cr>")
-vim.keymap.set({ "n", "x", "i" }, "<M-k>", "<cmd>tabn<cr>")
+vim.keymap.set({ "n", "x", "i", "t" }, "<M-j>", "<cmd>tabp<cr>")
+vim.keymap.set({ "n", "x", "i", "t" }, "<M-k>", "<cmd>tabn<cr>")
+-- vim.keymap.set({ "n", "x", "i", "t" }, "<M-i>", "<cmd>TmuxNavigateRight<cr>")
+-- vim.keymap.set({ "n", "x", "i", "t" }, "<M-u>", "<cmd>TmuxNavigateLeft<cr>")
+vim.keymap.set({ "n", "x", "i", "t" }, "<M-h>", "<cmd>tabp<cr>")
+vim.keymap.set({ "n", "x", "i", "t" }, "<M-l>", "<cmd>tabn<cr>")
 
 vim.keymap.set("", "H", "^")
 vim.keymap.set("", "L", "g_")
@@ -30,6 +34,14 @@ vim.keymap.set("n", "<leader>to", "<cmd>tabonly<cr>")
 vim.keymap.set("n", "<leader>tr", "<cmd>TabRename <cr>")
 
 vim.keymap.set("n", "<leader>.", "<cmd>@:<cr>")
+-- diff
+vim.keymap.set("n", "<leader>dd", "<cmd>windo diffthis<cr>")
+vim.keymap.set("n", "<leader>doo", "<cmd>diffget<cr>")
+vim.keymap.set("n", "<leader>dol", "<cmd>.,.diffget<cr>")
+vim.keymap.set("x", "<leader>doo", "<cmd>'<,'>diffget<cr>")
+vim.keymap.set("n", "<leader>dpp", "<cmd>diffput<cr>")
+vim.keymap.set("n", "<leader>dpl", "<cmd>.,.diffput<cr>")
+vim.keymap.set("x", "<leader>dpp", "<cmd>'<,'>diffput<cr>")
 
 -- terminal
 vim.api.nvim_del_keymap("t", "<Esc><Esc>")
@@ -46,3 +58,16 @@ vim.keymap.set("", "<leader>ct", function()
   vim.opt.conceallevel = vim.opt.conceallevel:get() == 0 and 1 or 0
 end)
 -- vim.keymap.del("n", "<leader>w-")
+-- mutlicusor
+vim.api.nvim_del_keymap("n", "<esc>")
+local mc = require("multicursor-nvim")
+local keys = vim.api.nvim_replace_termcodes("<cmd>noh<cr><esc>", true, false, true)
+vim.keymap.set("n", "<esc>", function()
+  if not mc.cursorsEnabled() then
+    mc.enableCursors()
+  elseif mc.hasCursors() then
+    mc.clearCursors()
+  else
+    vim.api.nvim_feedkeys(keys, "n", true)
+  end
+end)
