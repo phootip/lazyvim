@@ -12,6 +12,11 @@ return {
       -- Rotate the main cursor.
       vim.keymap.set({"n", "v"}, "<left>", mc.nextCursor)
       vim.keymap.set({"n", "v"}, "<right>", mc.prevCursor)
+      vim.keymap.set({ "n", "v" }, "<c-q>", mc.toggleCursor)
+      -- Add cursor
+      vim.keymap.set({"n", "v"}, "<leader><up>", function() mc.lineAddCursor(-1) end)
+      vim.keymap.set({"n", "v"}, "<leader><down>", function() mc.lineAddCursor(1) end)
+
       -- Customize how cursors look.
       -- vim.api.nvim_set_hl(0, "MultiCursorCursor", { link = "Cursor" })
       -- vim.api.nvim_set_hl(0, "MultiCursorVisual", { link = "Visual" })
