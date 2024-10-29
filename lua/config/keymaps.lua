@@ -13,12 +13,20 @@ vim.keymap.set({ "n", "x", "i" }, "<C-h>", "<CMD>TmuxNavigateLeft<CR>", { silent
 vim.keymap.set({ "n", "x", "i" }, "<C-j>", "<CMD>TmuxNavigateDown<CR>", { silent = true })
 vim.keymap.set({ "n", "x", "i" }, "<C-k>", "<CMD>TmuxNavigateUp<CR>", { silent = true })
 vim.keymap.set({ "n", "x", "i" }, "<C-l>", "<CMD>TmuxNavigateRight<CR>", { silent = true })
-vim.keymap.set({ "n", "x", "i", "t" }, "<M-j>", "<cmd>tabp<cr>")
-vim.keymap.set({ "n", "x", "i", "t" }, "<M-k>", "<cmd>tabn<cr>")
+-- vim.keymap.set({ "n", "x", "i", "t" }, "<M-j>", "<cmd>tabp<cr>")
+-- vim.keymap.set({ "n", "x", "i", "t" }, "<M-k>", "<cmd>tabn<cr>")
 -- vim.keymap.set({ "n", "x", "i", "t" }, "<M-i>", "<cmd>TmuxNavigateRight<cr>")
 -- vim.keymap.set({ "n", "x", "i", "t" }, "<M-u>", "<cmd>TmuxNavigateLeft<cr>")
-vim.keymap.set({ "n", "x", "i", "t" }, "<M-h>", "<cmd>tabp<cr>")
-vim.keymap.set({ "n", "x", "i", "t" }, "<M-l>", "<cmd>tabn<cr>")
+vim.keymap.set({ "n", "x", "i", "t" }, "<M-u>", "<cmd>tabp<cr>")
+vim.keymap.set({ "n", "x", "i", "t" }, "<M-i>", "<cmd>tabn<cr>")
+
+-- stylua: ignore start
+-- harpoon mapping
+vim.api.nvim_del_keymap("", "<M-j>")
+vim.keymap.set("", "<M-j>", function() require("harpoon"):list():select(2) end, {})
+vim.api.nvim_del_keymap("", "<M-k>")
+vim.keymap.set("", "<M-k>", function() require("harpoon"):list():select(3) end, {})
+-- stylua: ignore end
 
 vim.keymap.set("", "H", "^")
 vim.keymap.set("", "L", "g_")
