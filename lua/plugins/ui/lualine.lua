@@ -12,7 +12,13 @@ local theme = {
 return {
   {
     "nvim-lualine/lualine.nvim",
+    dependencies = {
+      { "otavioschwanck/arrow.nvim" },
+    },
     opts = function(_, opts)
+      table.insert(opts.sections.lualine_b, function()
+        return require("arrow.statusline").text_for_statusline_with_icons()
+      end)
       table.insert(opts.sections.lualine_x, "filetype")
       table.insert(opts.sections.lualine_x, "fileformat")
       opts.winbar = {
@@ -24,9 +30,7 @@ return {
           --     modified = "", -- Text to show when the file is modified.
           --   },
           -- },
-          {
-            require("lazyvim.util").lualine.pretty_path(),
-          },
+          { require("lazyvim.util").lualine.pretty_path() },
         },
         lualine_y = {
           {

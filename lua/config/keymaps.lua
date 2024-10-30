@@ -22,10 +22,10 @@ vim.keymap.set({ "n", "x", "i", "t" }, "<M-i>", "<cmd>tabn<cr>")
 
 -- stylua: ignore start
 -- harpoon mapping
-vim.api.nvim_del_keymap("", "<M-j>")
-vim.keymap.set("", "<M-j>", function() require("harpoon"):list():select(2) end, {})
-vim.api.nvim_del_keymap("", "<M-k>")
-vim.keymap.set("", "<M-k>", function() require("harpoon"):list():select(3) end, {})
+-- vim.api.nvim_del_keymap("", "<M-j>")
+-- vim.keymap.set("", "<M-j>", function() require("harpoon"):list():select(2) end, {})
+-- vim.api.nvim_del_keymap("", "<M-k>")
+-- vim.keymap.set("", "<M-k>", function() require("harpoon"):list():select(3) end, {})
 -- stylua: ignore end
 
 vim.keymap.set("", "H", "^")
