@@ -7,7 +7,7 @@ return {
       local mc = require("multicursor-nvim")
       mc.setup()
       -- stylua: ignore start
-      vim.keymap.set({"n", "v"}, "<c-n>", function() mc.addCursor("*"); vim.cmd("noh") end)
+      vim.keymap.set({"n", "v"}, "<c-n>", function() mc.matchAddCursor(1) end)
       vim.keymap.set({"n", "v"}, "<leader>mc", mc.clearCursors)
       -- Rotate the main cursor.
       vim.keymap.set({"n", "v"}, "<left>", mc.nextCursor)
