@@ -22,13 +22,17 @@ vim.keymap.set({ "n", "x", "i", "t" }, "<M-i>", "<cmd>tabn<cr>")
 -- vim.keymap.set({ "n" }, "<Enter>", "za")
 vim.keymap.set({ "n" }, "<Enter>", function()
   if vim.o.buftype ~= "quickfix" then
-    -- vim.api.nvim_feedkeys("za", "n", true)
-    return "za"
+    local line = vim.fn.line(".")
+    if vim.fn.foldclosed(line) ~= -1 then
+      return "zo"
+    else
+      return "zjzo"
+    end
   else
-    -- vim.api.nvim_feedkeys("<Enter>", "n", true)
     return "<Enter>"
   end
 end, { expr = true, replace_keycodes = true })
+vim.keymap.set({ "n" }, "<BS>", "zc")
 -- stylua: ignore start
 -- harpoon mapping
 -- vim.api.nvim_del_keymap("", "<M-j>")

@@ -38,12 +38,27 @@ return {
         hint = { border = "double" },
       },
       mode = "n",
-      body = "<leader>z",
+      body = "z",
       heads = {
-        { "M", "zM", { desc = "Fold All" } },
         { "j", "zj", { desc = "Next Fold" } },
         { "k", "zk", { desc = "Previous Fold" } },
-        { "<Enter>", "za", { desc = "Toggle Fold" } },
+        {
+          "<Enter>",
+          function()
+            if vim.o.buftype == "quickfix" then
+              return "<Enter>"
+            else
+              local line = vim.fn.line(".")
+              if vim.fn.foldclosed(line) ~= -1 then
+                return "zo"
+              else
+                return "zjzo"
+              end
+            end
+          end,
+          { desc = "Fold Open", expr = true, replace_keycodes = true },
+        },
+        { "<BS>", "zc", { desc = "Fold Close" } },
       },
     })
     vim.keymap.set("n", "<leader>w_", "<C-W>s", { desc = "Split window below", remap = true })
