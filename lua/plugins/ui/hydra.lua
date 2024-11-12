@@ -30,6 +30,22 @@ return {
         { "D", "<cmd>-tabclose<cr>", { desc = "Tab close" } },
       },
     })
+    Hydra({
+      name = "Fold Operation",
+      hint = [[Fold Operation]],
+      config = {
+        color = "red",
+        hint = { border = "double" },
+      },
+      mode = "n",
+      body = "<leader>z",
+      heads = {
+        { "M", "zM", { desc = "Fold All" } },
+        { "j", "zj", { desc = "Next Fold" } },
+        { "k", "zk", { desc = "Previous Fold" } },
+        { "<Enter>", "za", { desc = "Toggle Fold" } },
+      },
+    })
     vim.keymap.set("n", "<leader>w_", "<C-W>s", { desc = "Split window below", remap = true })
     vim.keymap.set("n", "<leader>w|", "<C-W>v", { desc = "Split window side", remap = true })
     vim.keymap.set("n", "<leader>bs", "<CMD>w<CR>", { desc = "Save", remap = true })

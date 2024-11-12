@@ -19,7 +19,16 @@ vim.keymap.set({ "n", "x", "i" }, "<C-l>", "<CMD>TmuxNavigateRight<CR>", { silen
 -- vim.keymap.set({ "n", "x", "i", "t" }, "<M-u>", "<cmd>TmuxNavigateLeft<cr>")
 vim.keymap.set({ "n", "x", "i", "t" }, "<M-u>", "<cmd>tabp<cr>")
 vim.keymap.set({ "n", "x", "i", "t" }, "<M-i>", "<cmd>tabn<cr>")
-
+-- vim.keymap.set({ "n" }, "<Enter>", "za")
+vim.keymap.set({ "n" }, "<Enter>", function()
+  if vim.o.buftype ~= "quickfix" then
+    -- vim.api.nvim_feedkeys("za", "n", true)
+    return "za"
+  else
+    -- vim.api.nvim_feedkeys("<Enter>", "n", true)
+    return "<Enter>"
+  end
+end, { expr = true, replace_keycodes = true })
 -- stylua: ignore start
 -- harpoon mapping
 -- vim.api.nvim_del_keymap("", "<M-j>")
