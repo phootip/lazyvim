@@ -8,6 +8,7 @@ vim.keymap.set({ "n", "x" }, "X", '"_X')
 vim.keymap.set("n", "dx", '""dd')
 vim.keymap.set({ "n" }, "vil", "^vg_")
 vim.keymap.set({ "n" }, "yil", "^yg_")
+vim.keymap.set({ "n" }, "yi ", "yiW")
 vim.keymap.set({ "n" }, "val", "0v$h")
 
 vim.keymap.set({ "n", "x", "i" }, "<C-h>", "<CMD>TmuxNavigateLeft<CR>", { silent = true })
