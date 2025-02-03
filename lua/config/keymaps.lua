@@ -68,7 +68,7 @@ vim.keymap.set("n", "<leader>dpl", "<cmd>.,.diffput<cr>")
 vim.keymap.set("x", "<leader>dpp", "<cmd>'<,'>diffput<cr>")
 
 -- terminal
-vim.api.nvim_del_keymap("t", "<Esc><Esc>")
+-- vim.api.nvim_del_keymap("t", "<Esc><Esc>")
 vim.keymap.set({ "t" }, "<esc>", "<c-\\><c-n>")
 vim.keymap.set({ "n" }, "q", function()
   if vim.bo.buftype == "terminal" then
