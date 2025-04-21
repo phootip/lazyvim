@@ -7,7 +7,7 @@ end, {})
 
 local function openRepoNote()
   local file_name = vim.fs.basename(vim.fn.getcwd())
-  local file_location = "~/phootip/personal/notes/2 repos/" .. file_name .. ".md"
+  local file_location = "~/OneDrive/notes/notes/2 repos/" .. file_name .. ".md"
   local f = vim.fn.filereadable(vim.fn.expand(file_location))
   vim.cmd("e " .. file_location)
   if f == 0 then
@@ -40,7 +40,7 @@ return {
     workspaces = {
       {
         name = "personal",
-        path = "~/phootip/personal/notes",
+        path = "~/OneDrive/notes",
       },
     },
     daily_notes = {
