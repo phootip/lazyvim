@@ -17,17 +17,28 @@ vim.keymap.set("n", "<c-/>", "gcc", { remap = true })
 vim.keymap.set("v", "<C-_>", "gc", { remap = true })
 vim.keymap.set("v", "<C-/>", "gc", { remap = true })
 
-vim.keymap.set({ "n", "x", "i" }, "<C-h>", "<CMD>TmuxNavigateLeft<CR>", { silent = true })
-vim.keymap.set({ "n", "x", "i" }, "<C-j>", "<CMD>TmuxNavigateDown<CR>", { silent = true })
-vim.keymap.set({ "n", "x", "i" }, "<C-k>", "<CMD>TmuxNavigateUp<CR>", { silent = true })
-vim.keymap.set({ "n", "x", "i" }, "<C-l>", "<CMD>TmuxNavigateRight<CR>", { silent = true })
--- vim.keymap.set({ "n", "x", "i", "t" }, "<M-j>", "<cmd>tabp<cr>")
--- vim.keymap.set({ "n", "x", "i", "t" }, "<M-k>", "<cmd>tabn<cr>")
--- vim.keymap.set({ "n", "x", "i", "t" }, "<M-i>", "<cmd>TmuxNavigateRight<cr>")
--- vim.keymap.set({ "n", "x", "i", "t" }, "<M-u>", "<cmd>TmuxNavigateLeft<cr>")
-vim.keymap.set({ "n", "x", "i", "t" }, "<M-u>", "<cmd>tabp<cr>")
-vim.keymap.set({ "n", "x", "i", "t" }, "<M-i>", "<cmd>tabn<cr>")
--- vim.keymap.set({ "n" }, "<Enter>", "za")
+vim.keymap.set({ "n", "x", "i", "t" }, "<C-h>", "<CMD>TmuxNavigateLeft<CR>", { silent = true })
+vim.keymap.set({ "n", "x", "i", "t" }, "<C-j>", "<CMD>TmuxNavigateDown<CR>", { silent = true })
+vim.keymap.set({ "n", "x", "i", "t" }, "<C-k>", "<CMD>TmuxNavigateUp<CR>", { silent = true })
+vim.keymap.set({ "n", "x", "i", "t" }, "<C-l>", "<CMD>TmuxNavigateRight<CR>", { silent = true })
+
+-- tab switching
+vim.keymap.set({ "n", "x", "i" }, "<M-u>", "<cmd>tabp<cr>")
+vim.keymap.set({ "n", "x", "i" }, "<M-i>", "<cmd>tabn<cr>")
+-- switch terminal while keeping cursor pos
+vim.keymap.set({ "t" }, "<M-u>", function()
+  vim.cmd("stopinsert")
+  -- using vim.cmd("tabp") breaks cursor pos, why?
+  local keys = vim.api.nvim_replace_termcodes("<M-u>", true, false, true)
+  vim.api.nvim_feedkeys(keys, "m", false)
+end)
+vim.keymap.set({ "t" }, "<M-i>", function()
+  vim.cmd("stopinsert")
+  -- using vim.cmd("tabp") breaks cursor pos, why?
+  local keys = vim.api.nvim_replace_termcodes("<M-i>", true, false, true)
+  vim.api.nvim_feedkeys(keys, "m", false)
+end)
+-- unfold next foldable
 vim.keymap.set({ "n" }, "<Enter>", function()
   if vim.o.buftype ~= "quickfix" then
     local line = vim.fn.line(".")
@@ -41,18 +52,9 @@ vim.keymap.set({ "n" }, "<Enter>", function()
   end
 end, { expr = true, replace_keycodes = true })
 vim.keymap.set({ "n" }, "<BS>", "zc")
--- stylua: ignore start
--- harpoon mapping
--- vim.api.nvim_del_keymap("", "<M-j>")
--- vim.keymap.set("", "<M-j>", function() require("harpoon"):list():select(2) end, {})
--- vim.api.nvim_del_keymap("", "<M-k>")
--- vim.keymap.set("", "<M-k>", function() require("harpoon"):list():select(3) end, {})
--- stylua: ignore end
 
 vim.keymap.set("", "H", "^")
 vim.keymap.set("", "L", "g_")
--- vim.keymap.set("n", "K", "<cmd>BufferLineCycleNext<cr>")
--- vim.keymap.set("n", "J", "<cmd>BufferLineCyclePrev<cr>")
 vim.keymap.set("n", "K", "<cmd>tabn<cr>")
 vim.keymap.set("n", "J", "<cmd>tabp<cr>")
 vim.keymap.set("n", "]<Tab>", "<cmd>tabnext<cr>")
