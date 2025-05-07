@@ -68,18 +68,22 @@ vim.keymap.set("n", "<leader>tr", "<cmd>TabRename <cr>")
 vim.keymap.set("n", "<leader>.", "<cmd>@:<cr>")
 -- diff
 vim.keymap.set("n", "<leader>dd", "<cmd>windo diffthis<cr>")
-vim.keymap.set("n", "<leader>doo", "<cmd>diffget<cr>")
-vim.keymap.set("n", "<leader>dol", "<cmd>.,.diffget<cr>")
-vim.keymap.set("x", "<leader>doo", "<cmd>'<,'>diffget<cr>")
+vim.keymap.set("n", "<leader>dgo", "<cmd>diffget<cr>")
+vim.keymap.set("n", "<leader>dgl", "<cmd>.,.diffget<cr>")
+vim.keymap.set("x", "<leader>dgo", "<cmd>'<,'>diffget<cr>")
 vim.keymap.set("n", "<leader>dpp", "<cmd>diffput<cr>")
 vim.keymap.set("n", "<leader>dpl", "<cmd>.,.diffput<cr>")
 vim.keymap.set("x", "<leader>dpp", "<cmd>'<,'>diffput<cr>")
 
--- terminal
+-- terminal change mode
 -- vim.api.nvim_del_keymap("t", "<Esc><Esc>")
 vim.keymap.set({ "t" }, "<esc>", "<c-\\><c-n>")
-vim.keymap.set({ "t" }, "<M-q>", "<esc>")
+vim.keymap.set({ "t" }, "<F1>", "<esc>")
 vim.keymap.set({ "t" }, "<M-esc>", "<esc>")
+-- vim.keymap.set({ "n", "x", "i" }, "<F1>", "<ESC>")
+-- vim.keymap.set({ "t" }, "<F1>", "<c-\\><c-n>")
+-- vim.keymap.set({ "t" }, "<M-esc>", "<c-\\><c-n>")
+
 vim.keymap.set({ "n" }, "q", function()
   if vim.bo.buftype == "terminal" then
     vim.api.nvim_feedkeys("i", "n", true)

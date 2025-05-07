@@ -31,18 +31,30 @@ return {
           --   },
           -- },
           { require("lazyvim.util").lualine.pretty_path() },
-        },
-        lualine_y = {
           {
             function()
-              return vim.fn.getcwd()
+              local path = vim.fn.expand("%:p")
+              return path == "" and "empty file" or ""
             end,
           },
         },
+        -- lualine_y = {
+        --   {
+        --     function()
+        --       return vim.fn.getcwd()
+        --     end,
+        --   },
+        -- },
       }
       opts.inactive_winbar = {
         lualine_b = {
           { require("lazyvim.util").lualine.pretty_path() },
+          {
+            function()
+              local path = vim.fn.expand("%:p")
+              return path == "" and "empty file" or ""
+            end,
+          },
         },
       }
     end,
