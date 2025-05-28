@@ -35,6 +35,7 @@ return {
     "rebelot/kanagawa.nvim",
     priority = 1000,
     opts = {
+      transparent = true,
       overrides = function(colors)
         return {
           -- Visual = { bg = "#304666" },
@@ -44,32 +45,5 @@ return {
     },
   },
   { "LazyVim/LazyVim", opts = { colorscheme = "kanagawa" } },
-  -- { "LazyVim/LazyVim", opts = { colorscheme = "kanagawa-dragon" } },
-  {
-    "miversen33/sunglasses.nvim",
-    -- "phootip/sunglasses.nvim",
-    enabled = false,
-    lazy = false,
-    priority = 51,
-    opts = {
-      excluded_highlights = {
-        "WinSeparator",
-        { "lualine_.*", glob = true },
-        { "Diff*", glob = true },
-      },
-      filter_percent = 0.30,
-    },
-    keys = {
-      {
-        "<leader>ws",
-        function()
-          vim.cmd("SunglassesEnableToggle")
-          vim.cmd("SunglassesOff")
-        end,
-        silent = true,
-        mode = { "n" },
-        desc = "Sunglasses Toggle",
-      },
-    },
-  },
+  -- -- { "LazyVim/LazyVim", opts = { colorscheme = "kanagawa-dragon" } },
 }

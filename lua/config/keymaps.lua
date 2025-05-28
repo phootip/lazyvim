@@ -92,9 +92,9 @@ vim.keymap.set({ "n" }, "q", function()
   end
 end)
 
-vim.keymap.set("", "<leader>ct", function()
-  vim.opt.conceallevel = vim.opt.conceallevel:get() == 0 and 1 or 0
-end)
+-- vim.keymap.set("", "<leader>ct", function()
+--   vim.opt.conceallevel = vim.opt.conceallevel:get() == 0 and 1 or 0
+-- end)
 -- vim.keymap.del("n", "<leader>w-")
 -- mutlicusor
 vim.api.nvim_del_keymap("n", "<esc>")

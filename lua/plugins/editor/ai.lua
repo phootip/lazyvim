@@ -8,6 +8,11 @@ return {
     strategies = {
       chat = {
         adapter = "gemini",
+        keymaps = {
+          close = {
+            modes = { n = "<C-F14>", i = "<C-F14>" },
+          },
+        },
       },
       inline = {
         adapter = "gemini",
