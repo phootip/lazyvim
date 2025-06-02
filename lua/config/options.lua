@@ -11,7 +11,8 @@ vim.opt.autoread = true
 vim.opt.timeoutlen = 1000
 vim.g.snacks_animate = false
 -- vim.cmd([[highlight TermCursor guibg=#000000 guifg=#d466d8]])
-vim.cmd([[highlight TermCursor guibg=#000000 guifg=#cf4c92]])
+-- vim.cmd([[highlight TermCursor guibg=#000000 guifg=#cf4c92]])
+vim.cmd([[highlight TermCursor guibg=#000000 guifg=#ff0000]])
 -- vim.opt.foldmethod = "indent"
 -- vim.opt.foldtext = "v:lua.require'lazyvim.util'.ui.foldtext()"
 -- vim.opt.listchars = "eol:$,tab:>-,trail:~,extends:>,precedes:<"
