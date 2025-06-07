@@ -13,9 +13,9 @@ vim.g.snacks_animate = false
 -- vim.cmd([[highlight TermCursor guibg=#000000 guifg=#d466d8]])
 -- vim.cmd([[highlight TermCursor guibg=#000000 guifg=#cf4c92]])
 vim.cmd([[highlight TermCursor guibg=#000000 guifg=#ff0000]])
+-- vim.cmd([[highlight Normal guifg=#dcd7ba guibg=#1f2428]])
 -- vim.opt.foldmethod = "indent"
 -- vim.opt.foldtext = "v:lua.require'lazyvim.util'.ui.foldtext()"
--- vim.opt.listchars = "eol:$,tab:>-,trail:~,extends:>,precedes:<"
 vim.opt.listchars = "eol:↲,tab:>-,trail:~,extends:>,precedes:<"
 -- autoformat toggle <leader>uf
 

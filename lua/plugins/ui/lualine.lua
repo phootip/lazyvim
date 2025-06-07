@@ -9,6 +9,9 @@ local theme = {
   win = "TabLine",
   tail = "TabLine",
 }
+vim.api.nvim_create_user_command("ToggleTab", function()
+  vim.g.tabby_red_mode = not vim.g.tabby_red_mode
+end, { desc = "Set current Tabby tab highlight to red" })
 return {
   {
     "nvim-lualine/lualine.nvim",
@@ -57,7 +60,10 @@ return {
             line.sep("", theme.head, theme.fill),
           },
           line.tabs().foreach(function(tab)
-            local hl = tab.is_current() and theme.current_tab or theme.tab
+            -- local hl = tab.is_current() and theme.current_tab or theme.tab
+            -- local hl = tab.is_current() and "@comment.error" or theme.tab
+            local current_tab_hl = vim.g.tabby_red_mode and "@comment.error" or theme.current_tab
+            local hl = tab.is_current() and current_tab_hl or theme.tab
             return {
               line.sep("", hl, theme.fill),
               tab.is_current() and "" or "",

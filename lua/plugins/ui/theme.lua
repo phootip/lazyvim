@@ -35,7 +35,11 @@ return {
     "rebelot/kanagawa.nvim",
     priority = 1000,
     opts = {
-      transparent = true,
+      -- transparent = true,
+      -- dimInactive = true,
+      -- background = {
+      --   dark = "dragon",
+      -- },
       overrides = function(colors)
         return {
           -- Visual = { bg = "#304666" },
