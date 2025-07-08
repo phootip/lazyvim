@@ -38,9 +38,10 @@ vim.keymap.set({ "t" }, "<M-i>", function()
   local keys = vim.api.nvim_replace_termcodes("<M-i>", true, false, true)
   vim.api.nvim_feedkeys(keys, "m", false)
 end)
+
 -- unfold next foldable
 vim.keymap.set({ "n" }, "<Enter>", function()
-  if vim.o.buftype ~= "quickfix" then
+  if vim.o.buftype ~= "quickfix" and vim.o.filetype ~= "vim" then
     local line = vim.fn.line(".")
     if vim.fn.foldclosed(line) ~= -1 then
       return "zo"
