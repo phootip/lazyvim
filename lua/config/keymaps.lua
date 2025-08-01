@@ -17,6 +17,9 @@ vim.keymap.set("n", "<c-/>", "gcc", { remap = true })
 vim.keymap.set("v", "<C-_>", "gc", { remap = true })
 vim.keymap.set("v", "<C-/>", "gc", { remap = true })
 
+vim.keymap.set("v", "J", "gJ", { silent = true })
+vim.keymap.set("v", "gJ", "J", { silent = true })
+
 vim.keymap.set({ "n", "x", "i", "t" }, "<C-h>", "<CMD>TmuxNavigateLeft<CR>", { silent = true })
 vim.keymap.set({ "n", "x", "i", "t" }, "<C-j>", "<CMD>TmuxNavigateDown<CR>", { silent = true })
 vim.keymap.set({ "n", "x", "i", "t" }, "<C-k>", "<CMD>TmuxNavigateUp<CR>", { silent = true })
@@ -38,7 +41,6 @@ vim.keymap.set({ "t" }, "<M-i>", function()
   local keys = vim.api.nvim_replace_termcodes("<M-i>", true, false, true)
   vim.api.nvim_feedkeys(keys, "m", false)
 end)
-
 -- unfold next foldable
 vim.keymap.set({ "n" }, "<Enter>", function()
   if vim.o.buftype ~= "quickfix" and vim.o.filetype ~= "vim" then
