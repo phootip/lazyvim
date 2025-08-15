@@ -28,6 +28,10 @@ vim.keymap.set({ "n", "x", "i", "t" }, "<C-l>", "<CMD>TmuxNavigateRight<CR>", { 
 -- tab switching
 vim.keymap.set({ "n", "x", "i" }, "<M-u>", "<cmd>tabp<cr>")
 vim.keymap.set({ "n", "x", "i" }, "<M-i>", "<cmd>tabn<cr>")
+vim.keymap.set({ "n", "x", "i", "t" }, "<M-6>", function()
+  print(vim.o.buftype)
+  print(vim.o.filetype)
+end)
 -- switch terminal while keeping cursor pos
 vim.keymap.set({ "t" }, "<M-u>", function()
   vim.cmd("stopinsert")
@@ -36,10 +40,14 @@ vim.keymap.set({ "t" }, "<M-u>", function()
   vim.api.nvim_feedkeys(keys, "m", false)
 end)
 vim.keymap.set({ "t" }, "<M-i>", function()
-  vim.cmd("stopinsert")
-  -- using vim.cmd("tabp") breaks cursor pos, why?
   local keys = vim.api.nvim_replace_termcodes("<M-i>", true, false, true)
-  vim.api.nvim_feedkeys(keys, "m", false)
+  if vim.o.filetype == "fzf" then
+    vim.api.nvim_feedkeys(keys, "n", false)
+  else
+    vim.cmd("stopinsert")
+    -- using vim.cmd("tabp") breaks cursor pos, why?
+    vim.api.nvim_feedkeys(keys, "m", false)
+  end
 end)
 -- unfold next foldable
 vim.keymap.set({ "n" }, "<Enter>", function()
