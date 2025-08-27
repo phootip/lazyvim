@@ -28,6 +28,7 @@ require("lazy").setup({
     -- { import = "lazyvim.plugins.extras.editor.navic" },
     -- { import = "lazyvim.plugins.extras.coding.yanky" },
     { import = "lazyvim.plugins.extras.ui.treesitter-context" },
+    { import = "lazyvim.plugins.extras.util.chezmoi" },
     { import = "lazyvim.plugins.extras.coding.mini-surround" },
 
     --------------------------------------------------------------------
