@@ -6,13 +6,15 @@ return {
   },
   config = function()
     local Hydra = require("hydra")
+    vim.hydra = {}
+    vim.hydra.config = {
+      color = "red",
+      hint = { border = "double" },
+    }
     Hydra({
       name = "Window Operation",
       hint = [[Window Operation]],
-      config = {
-        color = "red",
-        hint = { border = "double" },
-      },
+      config = vim.hydra.config,
       mode = "n",
       body = "<leader>w",
       heads = {
@@ -33,10 +35,7 @@ return {
     Hydra({
       name = "Fold Operation",
       hint = [[Fold Operation]],
-      config = {
-        color = "red",
-        hint = { border = "double" },
-      },
+      config = vim.hydra.config,
       mode = "n",
       body = "z",
       heads = {

@@ -1,6 +1,8 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
+local Hydra = require("hydra")
+
 vim.keymap.set("x", "p", "P")
 vim.keymap.set("x", "P", "p")
 vim.keymap.set({ "n", "x" }, "x", '"_x')
@@ -70,6 +72,8 @@ vim.keymap.set({ "n" }, "<BS>", "zc")
 
 vim.keymap.set("", "H", "^")
 vim.keymap.set("", "L", "g_")
+
+-- Tab operation
 vim.keymap.set("n", "]<Tab>", "<cmd>tabnext<cr>")
 vim.keymap.set("n", "[<Tab>", "<cmd>tabprevious<cr>")
 vim.keymap.set("n", "<leader>tt", "<cmd>tabnew | term<cr>")
@@ -77,6 +81,18 @@ vim.keymap.set("n", "<leader>tn", "<cmd>tabnew<cr>")
 vim.keymap.set("n", "<leader>td", "<cmd>tabclose<cr>")
 vim.keymap.set("n", "<leader>to", "<cmd>tabonly<cr>")
 vim.keymap.set("n", "<leader>tr", "<cmd>TabRename <cr>")
+Hydra({
+  name = "Tab Operation",
+  hint = [[Tab Operation]],
+  config = vim.hydra.config,
+  mode = "n",
+  body = "<leader>t",
+  heads = {
+    { "h", "<cmd>-tabmove<cr>", { desc = "Move Tab left" } },
+    { "l", "<cmd>+tabmove<cr>", { desc = "Move Tab right" } },
+    { "d", "<cmd>tabclose<cr>", { desc = "Tab delete" } },
+  },
+})
 
 vim.keymap.set("n", "<leader>.", "<cmd>@:<cr>")
 -- diff
@@ -88,14 +104,40 @@ vim.keymap.set("n", "<leader>dpp", "<cmd>diffput<cr>")
 vim.keymap.set("n", "<leader>dpl", "<cmd>.,.diffput<cr>")
 vim.keymap.set("x", "<leader>dpp", "<cmd>'<,'>diffput<cr>")
 
--- terminal change mode
--- vim.api.nvim_del_keymap("t", "<Esc><Esc>")
+-- Terminal change mode
 vim.keymap.set({ "t" }, "<esc>", "<c-\\><c-n>")
 vim.keymap.set({ "t" }, "<F1>", "<esc>")
 vim.keymap.set({ "t" }, "<M-esc>", "<esc>")
--- vim.keymap.set({ "n", "x", "i" }, "<F1>", "<ESC>")
--- vim.keymap.set({ "t" }, "<F1>", "<c-\\><c-n>")
--- vim.keymap.set({ "t" }, "<M-esc>", "<c-\\><c-n>")
+-- vim.keymap.set({ "n" }, "tk", function()
+--   vim.api.nvim_feedkeys("[[", "t", false)
+-- end)
+vim.keymap.set("n", "<F9>", function()
+  print(dump({ a = 1 }))
+end)
+
+Hydra({
+  name = "Terminal Operation",
+  hint = [[Terminal Operation]],
+  config = vim.hydra.config,
+  mode = "n",
+  body = "t",
+  heads = {
+    {
+      "k",
+      function()
+        vim.api.nvim_feedkeys("[[", "n", false)
+      end,
+      { desc = "Prev Prompt" },
+    },
+    {
+      "j",
+      function()
+        vim.api.nvim_feedkeys("]]", "n", false)
+      end,
+      { desc = "Next Prompt" },
+    },
+  },
+})
 
 vim.keymap.set({ "n" }, "q", function()
   if vim.bo.buftype == "terminal" then
