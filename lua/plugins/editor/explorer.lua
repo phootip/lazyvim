@@ -64,9 +64,9 @@ return {
       },
       mappings = {
         go_in = "",
-        go_in_plus = "<CR>",
+        go_in_plus = "l",
         go_out = "",
-        go_out_plus = "<BS>",
+        go_out_plus = "h",
         reset = "-",
       },
     },

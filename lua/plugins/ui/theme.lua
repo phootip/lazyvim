@@ -35,7 +35,7 @@ return {
     "rebelot/kanagawa.nvim",
     priority = 1000,
     opts = {
-      -- transparent = true,
+      transparent = true,
       -- dimInactive = true,
       -- background = {
       --   dark = "dragon",
