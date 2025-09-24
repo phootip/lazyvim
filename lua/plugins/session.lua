@@ -7,9 +7,9 @@ return {
       auto_session_enabled = false,
     },
     keys = {
-      { "<leader>qr", "<CMD>SessionRestore<CR>", mode = { "n" }, desc = "Session Restore" },
-      { "<leader>qs", "<CMD>SessionSave<CR>", mode = { "n" }, desc = "Session Save" },
-      { "<leader>qd", "<CMD>SessionDelete<CR>", mode = { "n" }, desc = "Session Delete" },
+      { "<leader>qr", "<CMD>AutoSession restore<CR>", mode = { "n" }, desc = "Session Restore" },
+      { "<leader>qs", "<CMD>AutoSession save<CR>", mode = { "n" }, desc = "Session Save" },
+      { "<leader>qd", "<CMD>AutoSession delete<CR>", mode = { "n" }, desc = "Session Delete" },
     },
   },
 }

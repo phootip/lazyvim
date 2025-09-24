@@ -36,7 +36,8 @@ vim.keymap.set({ "n", "x", "i", "t" }, "<M-6>", function()
   print("buftype: " .. vim.o.buftype)
   print("filetype: " .. vim.o.filetype)
 end)
--- switch terminal while keeping cursor pos
+
+-- NOTE: Terminal - switch terminal while keeping cursor pos
 vim.keymap.set({ "t" }, "<M-u>", function()
   vim.cmd("stopinsert")
   -- using vim.cmd("tabp") breaks cursor pos, why?
