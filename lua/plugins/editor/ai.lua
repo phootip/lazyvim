@@ -38,6 +38,7 @@ return {
       instructions_file = "avante.md",
       -- for example
       provider = "gemini",
+      auto_suggestions_provider = "gemini",
       input = {
         provider = "snacks",
         provider_opts = {
@@ -45,6 +46,10 @@ return {
           title = "Avante Input",
           icon = " ",
         },
+      },
+      edit = {
+        border = "rounded",
+        start_insert = false, -- Start insert mode when opening the edit window
       },
     },
     dependencies = {

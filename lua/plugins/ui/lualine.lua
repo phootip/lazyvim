@@ -12,6 +12,18 @@ local theme = {
 vim.api.nvim_create_user_command("ToggleTab", function()
   vim.g.tabby_red_mode = not vim.g.tabby_red_mode
 end, { desc = "Set current Tabby tab highlight to red" })
+
+local emptyFile = function()
+  local path = vim.fn.expand("%:p")
+  local filetype = vim.bo.filetype
+  if filetype == "Avante" or filetype == "AvanteSelectedFiles" or filetype == "AvanteInput" then
+    return ""
+  elseif path == "" then
+    return "empty file"
+  else
+    return ""
+  end
+end
 return {
   {
     "nvim-lualine/lualine.nvim",
@@ -27,23 +39,13 @@ return {
       opts.winbar = {
         lualine_b = {
           { require("lazyvim.util").lualine.pretty_path() },
-          {
-            function()
-              local path = vim.fn.expand("%:p")
-              return path == "" and "empty file" or ""
-            end,
-          },
+          { emptyFile },
         },
       }
       opts.inactive_winbar = {
         lualine_b = {
           { require("lazyvim.util").lualine.pretty_path() },
-          {
-            function()
-              local path = vim.fn.expand("%:p")
-              return path == "" and "empty file" or ""
-            end,
-          },
+          { emptyFile },
         },
       }
     end,
