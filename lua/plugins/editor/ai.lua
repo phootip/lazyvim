@@ -33,12 +33,14 @@ return {
     ---@module 'avante'
     ---@type avante.Config
     opts = {
-      -- add any opts here
-      -- this file can contain specific instructions for your project
       instructions_file = "avante.md",
-      -- for example
       provider = "gemini",
-      auto_suggestions_provider = "gemini",
+      -- auto_suggestions_provider = "gemini",
+      behaviour = {
+        auto_focus_sidebar = true,
+        -- auto_approve_tool_permissions = false, -- automatically approve tool permissions requests
+        enable_fastapply = false,
+      },
       input = {
         provider = "snacks",
         provider_opts = {
@@ -47,14 +49,10 @@ return {
           icon = " ",
         },
       },
-      -- input = {
-      --   provider = "native",
-      --   provider_opts = {},
-      -- },
       selector = {
         -- @alias avante.SelectorProvider "native" | "fzf_lua" | "mini_pick" | "snacks" | "telescope" | fun(selector: avante.ui.Selector): nil
         -- @type avante.SelectorProvider
-        provider = "fzf",
+        provider = "fzf_lua",
         -- Options override for custom providers
         provider_opts = {},
       },

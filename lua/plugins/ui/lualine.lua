@@ -44,8 +44,15 @@ return {
         },
       }
       opts.options.disabled_filetypes = {
-        statusline = { "NvimTree", "Avante", "AvanteInput", "AvanteSelectedFiles", "AvanteSelectedCode" },
-        winbar = { "NvimTree", "Avante", "AvanteInput", "AvanteSelectedFiles", "AvanteSelectedCode" },
+        winbar = {
+          "snacks_dashboard",
+          "noice",
+          "NvimTree",
+          "Avante",
+          "AvanteInput",
+          "AvanteSelectedFiles",
+          "AvanteSelectedCode",
+        },
       }
     end,
   },
