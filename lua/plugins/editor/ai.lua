@@ -34,11 +34,11 @@ return {
     ---@type avante.Config
     opts = {
       instructions_file = "avante.md",
-      provider = "gemini",
-      -- auto_suggestions_provider = "gemini",
+      provider = "gemini-cli",
+      -- auto_suggestions_provider = "copilot",
       behaviour = {
-        auto_focus_sidebar = true,
-        -- auto_approve_tool_permissions = false, -- automatically approve tool permissions requests
+        auto_focus_sidebar = false,
+        -- auto_approve_tool_permissions = false,
         enable_fastapply = false,
       },
       input = {
@@ -57,6 +57,7 @@ return {
         provider_opts = {},
       },
       windows = {
+        width = 40,
         fillchars = "eob: ,horiz:─,horizdown:┬,horizup:┴,vert:│,verthoriz:┼,vertleft:┤,vertright:├",
         input = {
           prefix = "❯",

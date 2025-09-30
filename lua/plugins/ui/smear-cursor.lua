@@ -8,12 +8,18 @@ return {
   },
   {
     "sphamba/smear-cursor.nvim",
-    opts = {
-      -- cursor_color = "none",
-      cursor_color = "#d466d8",
-      -- trailing_stiffness = 0.4,
-      -- trailing_exponent = 5,
-      -- time_interval = 7,
-    },
+    config = function()
+      local opts = {
+        cursor_color = "#d466d8",
+      }
+      require("smear_cursor").setup(opts)
+      -- require("smear_cursor").toggle()
+      vim.keymap.set(
+        { "n" },
+        "<leader>um",
+        "<CMD>SmearCursorToggle<CR>",
+        { silent = true, desc = "Toggle Smear Cursor" }
+      )
+    end,
   },
 }

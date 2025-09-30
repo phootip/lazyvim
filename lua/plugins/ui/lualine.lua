@@ -52,6 +52,10 @@ return {
           "AvanteInput",
           "AvanteSelectedFiles",
           "AvanteSelectedCode",
+          -- kulala file
+          "text",
+          "json",
+          "kulala_verbose_result",
         },
       }
     end,
