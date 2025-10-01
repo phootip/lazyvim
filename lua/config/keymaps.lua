@@ -68,7 +68,7 @@ vim.keymap.set({ "n" }, "<Enter>", function()
   end
 end, { expr = true, replace_keycodes = true })
 vim.keymap.set({ "n" }, "<BS>", "zc")
-
+-- NOTE: Terminal
 vim.keymap.set("", "H", "^")
 vim.keymap.set("", "L", "g_")
 vim.keymap.set("n", "]<Tab>", "<cmd>tabnext<cr>")
@@ -78,10 +78,22 @@ vim.keymap.set("n", "<leader>tn", "<cmd>tabnew<cr>")
 vim.keymap.set("n", "<leader>td", "<cmd>tabclose<cr>")
 vim.keymap.set("n", "<leader>to", "<cmd>tabonly<cr>")
 vim.keymap.set("n", "<leader>tr", "<cmd>TabRename <cr>")
+-- vim.keymap.set("n", "<leader>t", function()
+--   require("which-key").show({ keys = "<leader>t", loop = true })
+-- end)
+-- NOTE: UI
+vim.keymap.del("n", "<leader>us")
+vim.keymap.set({ "n" }, "<leader>us", "<CMD>SmearCursorToggle<CR>", { silent = true, desc = "Toggle Smear Cursor" })
 
-vim.keymap.set("n", "<leader>.", "<cmd>@:<cr>")
--- diff
-vim.keymap.set("n", "<leader>dd", "<cmd>windo diffthis<cr>")
+-- vim.keymap.set("n", "<leader>.", "<cmd>@:<cr>")
+-- NOTE: Diff
+vim.keymap.set("n", "<leader>dd", function()
+  if vim.wo.diff then
+    vim.cmd("windo diffoff")
+  else
+    vim.cmd("windo diffthis")
+  end
+end)
 vim.keymap.set("n", "<leader>dgo", "<cmd>diffget<cr>")
 vim.keymap.set("n", "<leader>dgl", "<cmd>.,.diffget<cr>")
 vim.keymap.set("x", "<leader>dgo", "<cmd>'<,'>diffget<cr>")
@@ -94,9 +106,6 @@ vim.keymap.set("x", "<leader>dpp", "<cmd>'<,'>diffput<cr>")
 vim.keymap.set({ "t" }, "<esc>", "<c-\\><c-n>")
 vim.keymap.set({ "t" }, "<F1>", "<esc>")
 vim.keymap.set({ "t" }, "<M-esc>", "<esc>")
--- vim.keymap.set({ "n", "x", "i" }, "<F1>", "<ESC>")
--- vim.keymap.set({ "t" }, "<F1>", "<c-\\><c-n>")
--- vim.keymap.set({ "t" }, "<M-esc>", "<c-\\><c-n>")
 
 vim.keymap.set({ "n" }, "q", function()
   if vim.bo.buftype == "terminal" then
@@ -106,10 +115,6 @@ vim.keymap.set({ "n" }, "q", function()
   end
 end)
 
--- vim.keymap.set("", "<leader>ct", function()
---   vim.opt.conceallevel = vim.opt.conceallevel:get() == 0 and 1 or 0
--- end)
--- vim.keymap.del("n", "<leader>w-")
 -- mutlicusor
 vim.api.nvim_del_keymap("n", "<esc>")
 local mc = require("multicursor-nvim")

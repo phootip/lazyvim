@@ -32,6 +32,7 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.util.chezmoi" },
     { import = "lazyvim.plugins.extras.coding.mini-surround" },
 
+    -- Extras: AI ------------------------------------------------------
     { import = "lazyvim.plugins.extras.ai.copilot" },
 
     --------------------------------------------------------------------

@@ -1,3 +1,4 @@
+-- NOTE: note taking
 vim.api.nvim_create_user_command("ObsidianNewDefaultTemplate", function()
   vim.cmd("ObsidianNew")
   vim.cmd("normal! ggO") -- add properties at the start
@@ -22,20 +23,10 @@ end
 
 return {
   "obsidian-nvim/obsidian.nvim",
-  version = "*", -- recommended, use latest release instead of latest commit
-  -- enabled = false,
+  version = "*",
+  -- version = false,
   lazy = true,
   ft = "markdown",
-  -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
-  -- event = {
-  --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
-  --   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
-  --   "BufReadPre path/to/my-vault/**.md",
-  --   "BufNewFile path/to/my-vault/**.md",
-  -- },
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-  },
   opts = {
     workspaces = {
       {
@@ -71,6 +62,10 @@ return {
       end
       return output
     end,
+    completion = {
+      blink = true, -- if not set, might have issue with lazy loading
+      min_chars = 0,
+    },
   },
   keys = {
     { "<leader>nd", "<CMD>ObsidianToday<CR>", silent = true, mode = { "n" }, desc = "Today note" },
