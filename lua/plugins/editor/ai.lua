@@ -1,27 +1,30 @@
+-- return {
+--   "olimorris/codecompanion.nvim",
+--   dependencies = {
+--     "nvim-lua/plenary.nvim",
+--     "nvim-treesitter/nvim-treesitter",
+--   },
+--   config = {
+--     strategies = {
+--       chat = {
+--         adapter = "gemini",
+--         keymaps = {
+--           close = {
+--             modes = { n = "<C-F14>", i = "<C-F14>" },
+--           },
+--         },
+--       },
+--       inline = {
+--         adapter = "gemini",
+--       },
+--     },
+--   },
+--   keys = {
+--     { "<C-a>", "<CMD>CodeCompanionActions<CR>", silent = true, mode = { "n" }, desc = "CodeCompanionActions" },
+--   },
+-- }
+
 return {
-  -- "olimorris/codecompanion.nvim",
-  -- dependencies = {
-  --   "nvim-lua/plenary.nvim",
-  --   "nvim-treesitter/nvim-treesitter",
-  -- },
-  -- config = {
-  --   strategies = {
-  --     chat = {
-  --       adapter = "gemini",
-  --       keymaps = {
-  --         close = {
-  --           modes = { n = "<C-F14>", i = "<C-F14>" },
-  --         },
-  --       },
-  --     },
-  --     inline = {
-  --       adapter = "gemini",
-  --     },
-  --   },
-  -- },
-  -- keys = {
-  --   { "<C-a>", "<CMD>CodeCompanionActions<CR>", silent = true, mode = { "n" }, desc = "CodeCompanionActions" },
-  -- },
   {
     "yetone/avante.nvim",
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
@@ -110,6 +113,56 @@ return {
           file_types = { "markdown", "Avante" },
         },
         ft = { "markdown", "Avante" },
+      },
+    },
+  },
+  {
+    "folke/sidekick.nvim",
+    enabled = false,
+    opts = {
+      -- add any options here
+      cli = {
+        mux = {
+          backend = "tmux",
+          enabled = true,
+        },
+      },
+    },
+    keys = {
+      {
+        "<tab>",
+        function()
+          -- if there is a next edit, jump to it, otherwise apply it if any
+          if not require("sidekick").nes_jump_or_apply() then
+            return "<Tab>" -- fallback to normal tab
+          end
+        end,
+        expr = true,
+        desc = "Goto/Apply Next Edit Suggestion",
+      },
+      {
+        "<c-.>",
+        function()
+          require("sidekick.cli").focus()
+        end,
+        mode = { "n", "x", "i", "t" },
+        desc = "Sidekick Switch Focus",
+      },
+      {
+        "<leader>aa",
+        function()
+          require("sidekick.cli").toggle({ name = "gemini", focus = true })
+        end,
+        desc = "Sidekick Toggle CLI",
+        mode = { "n", "v" },
+      },
+      {
+        "<leader>ap",
+        function()
+          require("sidekick.cli").select_prompt()
+        end,
+        desc = "Sidekick Ask Prompt",
+        mode = { "n", "v" },
       },
     },
   },
