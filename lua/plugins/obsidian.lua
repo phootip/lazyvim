@@ -6,19 +6,54 @@ vim.api.nvim_create_user_command("ObsidianNewDefaultTemplate", function()
   vim.cmd("normal! ddG") -- go to end of file
 end, {})
 
+local repo_note_win = nil
+local repo_note_buf = nil
+
 local function openRepoNote()
+  if repo_note_win and vim.api.nvim_win_is_valid(repo_note_win) then
+    vim.api.nvim_win_close(repo_note_win, true)
+    repo_note_win = nil
+    repo_note_buf = nil
+    return
+  end
+
   local file_name = vim.fs.basename(vim.fn.getcwd())
-  local file_location = "~/OneDrive/notes/2 repos/" .. file_name .. ".md"
-  local f = vim.fn.filereadable(vim.fn.expand(file_location))
-  vim.cmd("e " .. file_location)
+  local file_location = vim.fn.expand("~/OneDrive/notes/2 repos/" .. file_name .. ".md")
+
+  repo_note_buf = vim.api.nvim_create_buf(true, false)
+
+  local width = math.floor(vim.o.columns * 0.8)
+  local height = math.floor(vim.o.lines * 0.8)
+  local col = math.floor((vim.o.columns - width) / 2)
+  local row = math.floor((vim.o.lines - height) / 2)
+
+  local win_opts = {
+    relative = "editor",
+    width = width,
+    height = height,
+    col = col,
+    row = row,
+    style = "minimal",
+    border = "rounded",
+  }
+
+  repo_note_win = vim.api.nvim_open_win(repo_note_buf, true, win_opts)
+  vim.api.nvim_set_option_value("winhl", "Normal:NormalFloat,FloatBorder:FloatBorder", { win = repo_note_win })
+
+  local f = vim.fn.filereadable(file_location)
   if f == 0 then
+    vim.api.nvim_buf_set_name(repo_note_buf, file_location)
     vim.cmd("normal! ggO") -- add properties at the start
     vim.cmd("ObsidianTemplate repo.md")
     vim.cmd("normal! ddG") -- go to end of file
     vim.api.nvim_set_current_line("# " .. file_name)
     vim.cmd("normal! o") -- go to end of file
     vim.cmd("w") -- go to end of file
+  else
+    vim.cmd("edit " .. file_location)
   end
+
+  vim.api.nvim_buf_set_keymap(repo_note_buf, "n", "q", "<cmd>close<cr>", { noremap = true, silent = true })
 end
 
 return {

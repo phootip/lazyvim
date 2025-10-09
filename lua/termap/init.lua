@@ -44,7 +44,7 @@ M.open = function()
     buffer = buf_a,
     callback = M.update,
   })
-  print(dump(vim.api.nvim_get_autocmds({ group = "termap" })))
+  -- print(dump(vim.api.nvim_get_autocmds({ group = "termap" })))
 end
 
 M.close = function()

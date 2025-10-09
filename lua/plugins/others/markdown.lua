@@ -1,23 +1,23 @@
 return {
-  {
-    "iamcco/markdown-preview.nvim",
-    enabled = true,
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    build = function()
-      vim.fn["mkdp#util#install"]()
-    end,
-    keys = {
-      {
-        "<leader>cp",
-        ft = "markdown",
-        "<cmd>MarkdownPreviewToggle<cr>",
-        desc = "Markdown Preview",
-      },
-    },
-    config = function()
-      vim.cmd([[do FileType]])
-    end,
-  },
+  -- {
+  --   "iamcco/markdown-preview.nvim",
+  --   enabled = true,
+  --   cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+  --   build = function()
+  --     vim.fn["mkdp#util#install"]()
+  --   end,
+  --   keys = {
+  --     {
+  --       "<leader>cp",
+  --       ft = "markdown",
+  --       "<cmd>MarkdownPreviewToggle<cr>",
+  --       desc = "Markdown Preview",
+  --     },
+  --   },
+  --   config = function()
+  --     vim.cmd([[do FileType]])
+  --   end,
+  -- },
   -- {
   --   "MeanderingProgrammer/render-markdown.nvim",
   --   dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-mini/mini.nvim" }, -- if you use the mini.nvim suite

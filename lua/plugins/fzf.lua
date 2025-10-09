@@ -1,5 +1,6 @@
 return {
   "ibhagwan/fzf-lua",
+  -- enabled = false,
   opts = {
     oldfiles = {
       include_current_session = true,
@@ -7,6 +8,7 @@ return {
     previewers = {
       builtin = {
         syntax_limit_b = 1024 * 100,
+        snacks_image = { enabled = false, render_inline = false },
       },
     },
     winopts = {

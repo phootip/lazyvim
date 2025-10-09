@@ -55,6 +55,7 @@ return {
           -- kulala file
           "text",
           "json",
+          "html",
           "kulala_verbose_result",
         },
       }
