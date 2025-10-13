@@ -112,16 +112,4 @@ return {
       },
     },
   },
-  {
-    "stevearc/oil.nvim",
-    enabled = false,
-    opts = {
-      keymaps = {
-        ["<BS>"] = "actions.parent",
-      },
-    },
-    keys = {
-      { "<leader>fm", "<CMD>Oil --float<CR>", mode = { "n" }, silent = true, desc = "Open parent directory" },
-    },
-  },
 }

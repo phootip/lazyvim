@@ -31,6 +31,10 @@ return {
       end)
       table.insert(opts.sections.lualine_x, "filetype")
       table.insert(opts.sections.lualine_x, "fileformat")
+      local custom_theme = require("lualine.themes.auto")
+      custom_theme.terminal = custom_theme.replace
+      opts.options.theme = custom_theme
+      -- print(dump(opts.options.theme))
       opts.winbar = {
         lualine_b = {
           { require("lazyvim.util").lualine.pretty_path() },
