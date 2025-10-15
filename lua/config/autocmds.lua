@@ -35,3 +35,14 @@ vim.api.nvim_create_autocmd("BufEnter", {
     end
   end,
 })
+
+vim.api.nvim_create_autocmd("TextChangedT", {
+  callback = function()
+    local term_title = vim.b.term_title -- May need to be set by the program itself
+    if term_title == "k9s" then
+      vim.api.nvim_buf_set_keymap(0, "t", "q", "<M-esc>", { silent = true })
+    else
+      pcall(vim.api.nvim_buf_del_keymap, 0, "t", "q")
+    end
+  end,
+})

@@ -33,7 +33,7 @@ local function openRepoNote()
     height = height,
     col = col,
     row = row,
-    style = "minimal",
+    -- style = "minimal",
     border = "rounded",
   }
 
