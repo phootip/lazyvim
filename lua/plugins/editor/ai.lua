@@ -38,6 +38,7 @@ return {
     opts = {
       instructions_file = "avante.md",
       provider = "gemini-cli",
+      -- provider = "copilot",
       -- auto_suggestions_provider = "copilot",
       behaviour = {
         auto_focus_sidebar = false,
