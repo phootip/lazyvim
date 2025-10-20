@@ -6,6 +6,9 @@ return {
     ---@type snacks.Config
     opts = {
       dashboard = {
+        sections = {
+          { section = "header" },
+        },
         preset = {
           header = [[
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣤⣄⡀⠀⠀⠀

@@ -38,11 +38,47 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 vim.api.nvim_create_autocmd("TextChangedT", {
   callback = function()
-    local term_title = vim.b.term_title -- May need to be set by the program itself
-    if term_title == "k9s" then
+    local is_k9s = (vim.b.term_title == "k9s")
+    local maps_set = vim.b.k9s_maps_set
+
+    if is_k9s and not maps_set then
       vim.api.nvim_buf_set_keymap(0, "t", "q", "<M-esc>", { silent = true })
-    else
-      pcall(vim.api.nvim_buf_del_keymap, 0, "t", "q")
+      vim.api.nvim_buf_set_keymap(0, "t", "y", "c", { silent = true })
+      vim.b.k9s_maps_set = true
+    elseif not is_k9s and maps_set then
+      vim.api.nvim_buf_del_keymap(0, "t", "q")
+      vim.api.nvim_buf_del_keymap(0, "t", "y")
+      vim.b.k9s_maps_set = false
     end
   end,
 })
+
+-- vim.api.nvim_buf_set_keymap(0, "t", "/", "<M-esc>", { silent = true })
+-- local buffer_keymaps = vim.api.nvim_get_buf_keymap(0, "n")
+-- print(buffer_keymaps)
+--
+-- -- Iterate through the keymaps to find a specific one
+-- local function is_keymap_set(bufnr, mode, lhs)
+--   local keymaps = vim.api.nvim_get_buf_keymap(bufnr, mode)
+--   for _, keymap in ipairs(keymaps) do
+--     if keymap.lhs == lhs then
+--       return true, keymap -- Return true and the keymap table if found
+--     end
+--   end
+--   return false
+-- end
+--
+-- -- Example usage:
+-- local bufnr = vim.api.nvim_get_current_buf() -- Get the current buffer number
+-- local mode = "n"
+-- local lhs_to_check = "<leader>f"
+--
+-- local found, keymap_info = is_keymap_set(bufnr, mode, lhs_to_check)
+--
+-- if found then
+--   print(
+--     string.format("Keymap '%s' in mode '%s' is set for buffer %d. RHS: %s", lhs_to_check, mode, bufnr, keymap_info.rhs)
+--   )
+-- else
+--   print(string.format("Keymap '%s' in mode '%s' is NOT set for buffer %d.", lhs_to_check, mode, bufnr))
+-- end
