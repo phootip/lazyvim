@@ -36,22 +36,22 @@ vim.api.nvim_create_autocmd("BufEnter", {
   end,
 })
 
-vim.api.nvim_create_autocmd("TextChangedT", {
-  callback = function()
-    local is_k9s = (vim.b.term_title == "k9s")
-    local maps_set = vim.b.k9s_maps_set
-
-    if is_k9s and not maps_set then
-      vim.api.nvim_buf_set_keymap(0, "t", "q", "<M-esc>", { silent = true })
-      vim.api.nvim_buf_set_keymap(0, "t", "y", "c", { silent = true })
-      vim.b.k9s_maps_set = true
-    elseif not is_k9s and maps_set then
-      vim.api.nvim_buf_del_keymap(0, "t", "q")
-      vim.api.nvim_buf_del_keymap(0, "t", "y")
-      vim.b.k9s_maps_set = false
-    end
-  end,
-})
+-- vim.api.nvim_create_autocmd("TextChangedT", {
+--   callback = function()
+--     local is_k9s = (vim.b.term_title == "k9s")
+--     local maps_set = vim.b.k9s_maps_set
+--
+--     if is_k9s and not maps_set then
+--       vim.api.nvim_buf_set_keymap(0, "t", "q", "<M-esc>", { silent = true })
+--       vim.api.nvim_buf_set_keymap(0, "t", "y", "c", { silent = true })
+--       vim.b.k9s_maps_set = true
+--     elseif not is_k9s and maps_set then
+--       vim.api.nvim_buf_del_keymap(0, "t", "q")
+--       vim.api.nvim_buf_del_keymap(0, "t", "y")
+--       vim.b.k9s_maps_set = false
+--     end
+--   end,
+-- })
 
 vim.api.nvim_create_autocmd("TextChangedT", {
   callback = function()

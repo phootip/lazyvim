@@ -40,6 +40,13 @@ return {
       provider = "gemini-cli",
       -- provider = "copilot",
       -- auto_suggestions_provider = "copilot",
+      -- acp_providers = {
+      --   ["gemini-cli"] = {
+      --     command = "gemini",
+      --     args = { "--experimental-acp" },
+      --     -- args = { "--experimental-acp -m gemini-2.5-flash" },
+      --   },
+      -- },
       behaviour = {
         auto_focus_sidebar = false,
         -- auto_approve_tool_permissions = false,

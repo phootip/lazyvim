@@ -11,6 +11,7 @@ vim.opt.autoread = true
 vim.opt.timeoutlen = 1000
 vim.g.snacks_animate = false
 -- vim.opt.fillchars = {}
+-- vim.cmd([[highlight Cursor guibg=#000000 guifg=#ff0000]])
 -- vim.cmd([[highlight TermCursor guibg=#000000 guifg=#d466d8]])
 -- vim.cmd([[highlight TermCursor guibg=#000000 guifg=#cf4c92]])
 vim.cmd([[highlight TermCursor guibg=#000000 guifg=#ff0000]])
