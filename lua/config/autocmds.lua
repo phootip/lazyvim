@@ -53,6 +53,21 @@ vim.api.nvim_create_autocmd("TextChangedT", {
   end,
 })
 
+vim.api.nvim_create_autocmd("TextChangedT", {
+  callback = function()
+    local is_gemini = vim.b.term_title and vim.b.term_title:find("^Gemini")
+    local maps_set = vim.b.gemini_maps_set
+
+    if is_gemini and not maps_set then
+      vim.api.nvim_buf_set_keymap(0, "t", "<F2>", "<C-x>", { silent = true })
+      vim.b.gemini_maps_set = true
+    elseif not is_gemini and maps_set then
+      vim.api.nvim_buf_del_keymap(0, "t", "<F2>")
+      vim.b.gemini_maps_set = false
+    end
+  end,
+})
+
 -- vim.api.nvim_buf_set_keymap(0, "t", "/", "<M-esc>", { silent = true })
 -- local buffer_keymaps = vim.api.nvim_get_buf_keymap(0, "n")
 -- print(buffer_keymaps)

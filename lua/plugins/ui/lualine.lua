@@ -34,6 +34,8 @@ return {
       local custom_theme = require("lualine.themes.auto")
       custom_theme.terminal = custom_theme.replace
       opts.options.theme = custom_theme
+      opts.options.theme.terminal.a.bg = "#e03450"
+      opts.options.theme.terminal.b.fg = "#e03450"
       -- print(dump(opts.options.theme))
       opts.winbar = {
         lualine_b = {
