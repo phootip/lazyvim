@@ -33,9 +33,11 @@ return {
       table.insert(opts.sections.lualine_x, "fileformat")
       local custom_theme = require("lualine.themes.auto")
       custom_theme.terminal = {
-        a = { fg = "#1F1F28", bg = "#e03450" },
-        b = { fg = "#e03450", bg = "#1F1F28" },
-        c = { fg = "#1F1F28", bg = "#e03450" },
+        -- a = { fg = "#1F1F28", bg = "#e03450" },
+        a = { fg = "#e03450", bg = "#1F1F28" },
+        b = { fg = "#1F1F28", bg = "#e03450" },
+        -- b = { fg = "#e03450", bg = "#1F1F28" },
+        c = { fg = "#1F1F28", bg = "#b02440" },
       }
       opts.options.theme = custom_theme
       opts.winbar = {
