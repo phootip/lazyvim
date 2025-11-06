@@ -136,7 +136,7 @@ return {
         },
         tools = {
           gemini = {
-            cmd = { "gemini", "-m", "'gemini-2.5-flash'" },
+            cmd = { "gemini", "-m", "gemini-2.5-flash" },
           },
         },
       },
