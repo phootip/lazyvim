@@ -20,7 +20,7 @@ vim.cmd([[highlight TermCursor guibg=#000000 guifg=#ff0000]])
 -- vim.opt.foldtext = "v:lua.require'lazyvim.util'.ui.foldtext()"
 vim.opt.listchars = "eol:↲,tab:>-,trail:~,extends:>,precedes:<"
 -- autoformat toggle <leader>uf
-vim.g.lazyvim_picker = "fzf"
+-- vim.g.lazyvim_picker = "fzf"
 
 function dump(o)
   if type(o) == "table" then

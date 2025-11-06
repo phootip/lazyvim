@@ -55,19 +55,19 @@ vim.keymap.set({ "t" }, "<M-i>", function()
   end
 end)
 -- unfold next foldable
-vim.keymap.set({ "n" }, "<Enter>", function()
-  if vim.o.buftype ~= "quickfix" and vim.o.filetype ~= "vim" then
-    local line = vim.fn.line(".")
-    if vim.fn.foldclosed(line) ~= -1 then
-      return "zo"
-    else
-      return "zjzo"
-    end
-  else
-    return "<Enter>"
-  end
-end, { expr = true, replace_keycodes = true })
-vim.keymap.set({ "n" }, "<BS>", "zc")
+-- vim.keymap.set({ "n" }, "<Enter>", function()
+--   if vim.o.buftype ~= "quickfix" and vim.o.filetype ~= "vim" then
+--     local line = vim.fn.line(".")
+--     if vim.fn.foldclosed(line) ~= -1 then
+--       return "zo"
+--     else
+--       return "zjzo"
+--     end
+--   else
+--     return "<Enter>"
+--   end
+-- end, { expr = true, replace_keycodes = true })
+-- vim.keymap.set({ "n" }, "<BS>", "zc")
 -- NOTE: Terminal
 vim.keymap.set("", "H", "^")
 vim.keymap.set("", "L", "g_")
@@ -103,9 +103,11 @@ vim.keymap.set("x", "<leader>dpp", "<cmd>'<,'>diffput<cr>")
 
 -- terminal change mode
 -- vim.api.nvim_del_keymap("t", "<Esc><Esc>")
-vim.keymap.set({ "t" }, "<esc>", "<c-\\><c-n>")
-vim.keymap.set({ "t" }, "<F1>", "<esc>")
-vim.keymap.set({ "t" }, "<M-esc>", "<esc>")
+-- vim.keymap.set({ "t" }, "<esc><esc>", "<c-\\><c-n>")
+-- vim.keymap.set({ "t" }, "<esc>", "<c-\\><c-n>")
+vim.keymap.set({ "t" }, "<C-q>", "<c-\\><c-n>")
+-- vim.keymap.set({ "t" }, "<F1>", "<esc>")
+-- vim.keymap.set({ "t" }, "<M-esc>", "<esc>")
 
 vim.keymap.set({ "n" }, "q", function()
   if vim.bo.buftype == "terminal" then

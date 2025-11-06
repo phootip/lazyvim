@@ -66,6 +66,7 @@ return {
           "json",
           "html",
           "kulala_verbose_result",
+          "sidekick_terminal",
         },
       }
     end,

@@ -1,6 +1,6 @@
 return {
   "ibhagwan/fzf-lua",
-  -- enabled = false,
+  enabled = false,
   opts = {
     oldfiles = {
       include_current_session = true,

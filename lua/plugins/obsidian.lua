@@ -18,6 +18,21 @@ local function openRepoNote()
   end
 
   local file_name = vim.fs.basename(vim.fn.getcwd())
+  
+  -- Try to get git remote URL
+  local git_remote = vim.fn.system("git config --get remote.origin.url 2>/dev/null")
+  if vim.v.shell_error == 0 and git_remote ~= "" then
+    git_remote = git_remote:gsub("%s+$", "") -- trim whitespace
+    -- Parse git@github.com:owner/repo.git or https://github.com/owner/repo.git
+    local owner, repo = git_remote:match("git@[^:]+:([^/]+)/(.+)%.git")
+    if not owner then
+      owner, repo = git_remote:match("https?://[^/]+/([^/]+)/(.+)%.git")
+    end
+    if owner and repo then
+      file_name = owner .. "__" .. repo
+    end
+  end
+  
   local file_location = vim.fn.expand("~/OneDrive/notes/2 repos/" .. file_name .. ".md")
 
   repo_note_buf = vim.api.nvim_create_buf(true, false)
