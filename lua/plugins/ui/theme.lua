@@ -43,7 +43,7 @@ return {
       overrides = function(colors)
         return {
           -- Visual = { bg = "#304666" },
-          Visual = { bg = "#415d87" },
+          -- Visual = { bg = "#415d87" },
           WinSeparator = { fg = "#A3D4D5" },
         }
       end,

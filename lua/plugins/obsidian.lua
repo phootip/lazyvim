@@ -18,7 +18,7 @@ local function openRepoNote()
   end
 
   local file_name = vim.fs.basename(vim.fn.getcwd())
-  
+
   -- Try to get git remote URL
   local git_remote = vim.fn.system("git config --get remote.origin.url 2>/dev/null")
   if vim.v.shell_error == 0 and git_remote ~= "" then
@@ -32,7 +32,7 @@ local function openRepoNote()
       file_name = owner .. "__" .. repo
     end
   end
-  
+
   local file_location = vim.fn.expand("~/OneDrive/notes/2 repos/" .. file_name .. ".md")
 
   repo_note_buf = vim.api.nvim_create_buf(true, false)
@@ -121,6 +121,6 @@ return {
     { "<leader>nd", "<CMD>ObsidianToday<CR>", silent = true, mode = { "n" }, desc = "Today note" },
     { "<leader>nn", "<CMD>ObsidianNewDefaultTemplate<CR>", silent = true, mode = { "n" }, desc = "Today note" },
     { "<leader>nr", openRepoNote, silent = true, mode = { "n" }, desc = "Open Repo Note" },
-    { "<leader>nt", "<CMD>ObsidianTemplate<CR>", silent = true, mode = { "n" }, desc = "Today note" },
+    -- { "<leader>nt", "<CMD>ObsidianTemplate<CR>", silent = true, mode = { "n" }, desc = "Today note" },
   },
 }
