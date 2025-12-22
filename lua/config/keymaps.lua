@@ -135,6 +135,27 @@ vim.keymap.set({ "n" }, "q", function()
   end
 end)
 
+-- yank filepath relative to cwd
+vim.keymap.set("n", "<leader>yf", function()
+  local filepath = vim.fn.expand("%:.")
+  vim.fn.setreg("+", filepath)
+  print("Yanked: " .. filepath)
+end, { desc = "Yank filepath relative to cwd" })
+
+-- yank file absolute path
+vim.keymap.set("n", "<leader>yF", function()
+  local filepath = vim.fn.expand("%:p")
+  vim.fn.setreg("+", filepath)
+  print("Yanked: " .. filepath)
+end, { desc = "Yank file absolute path" })
+
+-- yank directory path relative to cwd
+vim.keymap.set("n", "<leader>yd", function()
+  local dirpath = vim.fn.expand("%:.:h")
+  vim.fn.setreg("+", dirpath)
+  print("Yanked: " .. dirpath)
+end, { desc = "Yank directory path relative to cwd" })
+
 -- mutlicusor
 vim.api.nvim_del_keymap("n", "<esc>")
 local mc = require("multicursor-nvim")
