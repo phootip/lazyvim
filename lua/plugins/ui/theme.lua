@@ -44,6 +44,7 @@ return {
         return {
           -- Visual = { bg = "#304666" },
           -- Visual = { bg = "#415d87" },
+          Visual = { bg = "#22334d" },
           WinSeparator = { fg = "#A3D4D5" },
         }
       end,

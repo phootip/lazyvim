@@ -121,6 +121,7 @@ return {
     { "<leader>nd", "<CMD>ObsidianToday<CR>", silent = true, mode = { "n" }, desc = "Today note" },
     { "<leader>nn", "<CMD>ObsidianNewDefaultTemplate<CR>", silent = true, mode = { "n" }, desc = "Today note" },
     { "<leader>nr", openRepoNote, silent = true, mode = { "n" }, desc = "Open Repo Note" },
+    { "<M-n>", openRepoNote, silent = true, mode = { "n", "t" }, desc = "Open Repo Note" },
     -- { "<leader>nt", "<CMD>ObsidianTemplate<CR>", silent = true, mode = { "n" }, desc = "Today note" },
   },
 }

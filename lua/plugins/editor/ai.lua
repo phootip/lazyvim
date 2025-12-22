@@ -138,6 +138,9 @@ return {
           gemini = {
             cmd = { "gemini", "-m", "gemini-2.5-flash" },
           },
+          amazon_q = {
+            cmd = { "kiro-cli" },
+          },
         },
       },
     },
@@ -154,7 +157,7 @@ return {
         desc = "Goto/Apply Next Edit Suggestion",
       },
       {
-        "<c-a>",
+        "<m-a>",
         function()
           require("sidekick.cli").toggle()
         end,
