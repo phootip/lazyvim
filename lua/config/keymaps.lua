@@ -71,19 +71,19 @@ end)
 -- end, { desc = "[P]Toggle fold" })
 
 -- old: unfold next foldable
--- vim.keymap.set({ "n" }, "<Enter>", function()
---   if vim.o.buftype ~= "quickfix" and vim.o.filetype ~= "vim" then
---     local line = vim.fn.line(".")
---     if vim.fn.foldclosed(line) ~= -1 then
---       return "zo"
---     else
---       return "zjzo"
---     end
---   else
---     return "<Enter>"
---   end
--- end, { expr = true, replace_keycodes = true })
--- vim.keymap.set({ "n" }, "<BS>", "zc")
+vim.keymap.set({ "n" }, "<Enter>", function()
+  if vim.o.buftype ~= "quickfix" and vim.o.filetype ~= "vim" then
+    local line = vim.fn.line(".")
+    if vim.fn.foldclosed(line) ~= -1 then
+      return "zo"
+    else
+      return "zjzo"
+    end
+  else
+    return "<Enter>"
+  end
+end, { expr = true, replace_keycodes = true })
+vim.keymap.set({ "n" }, "<BS>", "zc")
 --
 -- NOTE: Terminal
 vim.keymap.set("", "H", "^")
