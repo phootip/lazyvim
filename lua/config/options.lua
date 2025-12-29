@@ -10,8 +10,11 @@ vim.opt.showtabline = 2
 vim.opt.autoread = true
 vim.opt.timeoutlen = 1000
 vim.g.snacks_animate = false
+-- vim.opt.guicursor =
+-- "n-c-sm:block-Cursor,v-ve-o:VisualCursor,i-ci:ver25,r-cr:hor20,t:block-blinkon500-blinkoff500-TermCursor"
+vim.opt.guicursor = "n-v-c-sm:block-Cursor,i-ci-ve:ver25,r-cr-o:hor20,t:block-TermCursor"
 -- vim.opt.fillchars = {}
--- vim.cmd([[highlight Cursor guibg=#000000 guifg=#ff0000]])
+-- vim.cmd([[highlight Cursor guibg=#ff0000 guifg=#ff0000]])
 -- vim.cmd([[highlight TermCursor guibg=#000000 guifg=#d466d8]])
 -- vim.cmd([[highlight TermCursor guibg=#000000 guifg=#cf4c92]])
 -- vim.cmd([[highlight TermCursor guibg=#000000 guifg=#ff0000]])

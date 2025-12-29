@@ -135,15 +135,29 @@ vim.keymap.set({ "n" }, "q", function()
   end
 end)
 
--- yank filepath relative to cwd
+-- yank filename only
 vim.keymap.set("n", "<leader>yf", function()
+  local filename = vim.fn.expand("%:t")
+  vim.fn.setreg("+", filename)
+  print("Yanked: " .. filename)
+end, { desc = "Yank filename only" })
+
+-- yank file absolute path
+vim.keymap.set("n", "<leader>yF", function()
+  local filepath = vim.fn.expand("%:p")
+  vim.fn.setreg("+", filepath)
+  print("Yanked: " .. filepath)
+end, { desc = "Yank file absolute path" })
+
+-- yank filepath relative to cwd
+vim.keymap.set("n", "<leader>yp", function()
   local filepath = vim.fn.expand("%:.")
   vim.fn.setreg("+", filepath)
   print("Yanked: " .. filepath)
 end, { desc = "Yank filepath relative to cwd" })
 
 -- yank file absolute path
-vim.keymap.set("n", "<leader>yF", function()
+vim.keymap.set("n", "<leader>yP", function()
   local filepath = vim.fn.expand("%:p")
   vim.fn.setreg("+", filepath)
   print("Yanked: " .. filepath)

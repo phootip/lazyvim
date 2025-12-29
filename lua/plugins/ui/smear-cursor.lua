@@ -8,6 +8,7 @@ return {
   },
   {
     "sphamba/smear-cursor.nvim",
+    enabled = false,
     config = function()
       local opts = {
         cursor_color = "#d466d8",
