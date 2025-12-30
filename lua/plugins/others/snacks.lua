@@ -29,6 +29,7 @@ return {
       },
       sources = {
         explorer = {
+          hidden = true,
           win = {
             list = {
               keys = {
