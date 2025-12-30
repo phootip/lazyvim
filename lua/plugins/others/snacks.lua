@@ -1,90 +1,102 @@
 return {
   "folke/snacks.nvim",
-  opts = {
-    picker = {
-      layouts = {
-        dropdown = {
-          layout = {
-            backdrop = false,
-            row = 1,
-            min_width = 80,
-            width = 0.9,
-            height = 0.9,
-            -- border = "none",
-            box = "vertical",
-            { win = "preview", title = "{preview}", height = 0.6, border = "rounded" },
-            {
+  config = function(_, opts)
+    local opts_override = {
+      picker = {
+        layouts = {
+          dropdown = {
+            layout = {
+              backdrop = false,
+              row = 1,
+              min_width = 80,
+              width = 0.9,
+              height = 0.9,
+              -- border = "none",
               box = "vertical",
-              border = "rounded",
-              title = "{title} {live} {flags}",
-              title_pos = "center",
-              { win = "input", height = 1, border = "bottom" },
-              { win = "list", border = "none" },
-            },
-          },
-        },
-      },
-      layout = {
-        preset = "dropdown",
-      },
-      sources = {
-        explorer = {
-          hidden = true,
-          win = {
-            list = {
-              keys = {
-                ["Y"] = "copy_path",
+              { win = "preview", title = "{preview}", height = 0.6, border = "rounded" },
+              {
+                box = "vertical",
+                border = "rounded",
+                title = "{title} {live} {flags}",
+                title_pos = "center",
+                { win = "input", height = 1, border = "bottom" },
+                { win = "list", border = "none" },
               },
             },
           },
-          actions = {
-            copy_path = function(_, item)
-              local modify = vim.fn.fnamemodify
-              local filepath = item.file
-              local filename = modify(filepath, ":t")
-              local values = {
-                filepath,
-                modify(filepath, ":."),
-                modify(filepath, ":.") .. "/*",
-                modify(filepath, ":~"),
-                filename,
-                modify(filename, ":r"),
-                modify(filename, ":e"),
-              }
-              local items = {
-                "Absolute path: " .. values[1],
-                "Path relative to CWD: " .. values[2],
-                "Path with wild card: " .. values[3],
-                "Path relative to HOME: " .. values[4],
-                "Filename: " .. values[5],
-              }
-              if vim.fn.isdirectory(filepath) == 0 then
-                vim.list_extend(items, {
-                  "Filename without extension: " .. values[6],
-                  "Extension of the filename: " .. values[7],
-                })
-              end
-              vim.ui.select(items, { prompt = "Choose to copy to clipboard:" }, function(choice, i)
-                if not choice then
-                  vim.notify("Selection cancelled")
-                  return
+        },
+        layout = {
+          preset = "dropdown",
+        },
+        sources = {
+          explorer = {
+            hidden = true,
+            ignored = true,
+            -- root = false,
+            win = {
+              list = {
+                keys = {
+                  ["Y"] = "copy_path",
+                },
+              },
+            },
+            actions = {
+              copy_path = function(_, item)
+                local modify = vim.fn.fnamemodify
+                local filepath = item.file
+                local filename = modify(filepath, ":t")
+                local values = {
+                  filepath,
+                  modify(filepath, ":."),
+                  modify(filepath, ":.") .. "/*",
+                  modify(filepath, ":~"),
+                  filename,
+                  modify(filename, ":r"),
+                  modify(filename, ":e"),
+                }
+                local items = {
+                  "Absolute path: " .. values[1],
+                  "Path relative to CWD: " .. values[2],
+                  "Path with wild card: " .. values[3],
+                  "Path relative to HOME: " .. values[4],
+                  "Filename: " .. values[5],
+                }
+                if vim.fn.isdirectory(filepath) == 0 then
+                  vim.list_extend(items, {
+                    "Filename without extension: " .. values[6],
+                    "Extension of the filename: " .. values[7],
+                  })
                 end
-                if not i then
-                  vim.notify("Invalid selection")
-                  return
-                end
-                local result = values[i]
-                vim.fn.setreg('"', result) -- Neovim unnamed register
-                vim.fn.setreg("+", result) -- System clipboard
-                vim.notify("Copied: " .. result)
-              end)
-            end,
+                vim.ui.select(items, { prompt = "Choose to copy to clipboard:" }, function(choice, i)
+                  if not choice then
+                    vim.notify("Selection cancelled")
+                    return
+                  end
+                  if not i then
+                    vim.notify("Invalid selection")
+                    return
+                  end
+                  local result = values[i]
+                  vim.fn.setreg('"', result) -- Neovim unnamed register
+                  vim.fn.setreg("+", result) -- System clipboard
+                  vim.notify("Copied: " .. result)
+                end)
+              end,
+            },
           },
         },
       },
-    },
-  },
+    }
+    for k, v in pairs(opts_override) do
+      opts[k] = v
+    end
+    require("snacks").setup(opts)
+    vim.api.nvim_set_hl(0, "SnacksPickerPathHidden", { link = "Comment" })
+    vim.api.nvim_set_hl(0, "SnacksPickerPathIgnored", { link = "Comment" })
+  end,
   keys = {
+    { "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
+    { "<leader>E", function() Snacks.explorer({ cwd = LazyVim.root() }) end, desc = "File Explorer (root)" },
     { "<leader><space>", LazyVim.pick("live_grep", { root = false, hidden = true }), desc = "Grep (cwd)" },
     { "<leader>ff", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
     {

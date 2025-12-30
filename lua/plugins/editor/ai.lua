@@ -129,6 +129,10 @@ return {
     enabled = true,
     opts = {
       -- add any options here
+      -- NOTE: enable later after have more rate limit
+      nes = {
+        enabled = false,
+      },
       cli = {
         mux = {
           backend = "tmux",
