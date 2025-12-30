@@ -55,6 +55,101 @@ vim.keymap.set({ "t" }, "<M-i>", function()
   end
 end)
 
+-- NOTE: Fold section: start
+-- Function to fold all headings of a specific level
+local function fold_headings_of_level(level)
+  -- Move to the top of the file without adding to jumplist
+  vim.cmd("keepjumps normal! gg")
+  -- Get the total number of lines
+  local total_lines = vim.fn.line("$")
+  for line = 1, total_lines do
+    -- Get the content of the current line
+    local line_content = vim.fn.getline(line)
+    -- "^" -> Ensures the match is at the start of the line
+    -- string.rep("#", level) -> Creates a string with 'level' number of "#" characters
+    -- "%s" -> Matches any whitespace character after the "#" characters
+    -- So this will match `## `, `### `, `#### ` for example, which are markdown headings
+    if line_content:match("^" .. string.rep("#", level) .. "%s") then
+      -- Move the cursor to the current line without adding to jumplist
+      vim.cmd(string.format("keepjumps call cursor(%d, 1)", line))
+      -- Check if the current line has a fold level > 0
+      local current_foldlevel = vim.fn.foldlevel(line)
+      if current_foldlevel > 0 then
+        -- Fold the heading if it matches the level
+        if vim.fn.foldclosed(line) == -1 then
+          vim.cmd("normal! za")
+        end
+        -- else
+        --   vim.notify("No fold at line " .. line, vim.log.levels.WARN)
+      end
+    end
+  end
+end
+
+local function fold_markdown_headings(levels)
+  -- I save the view to know where to jump back after folding
+  local saved_view = vim.fn.winsaveview()
+  for _, level in ipairs(levels) do
+    fold_headings_of_level(level)
+  end
+  vim.cmd("nohlsearch")
+  -- Restore the view to jump to where I was
+  vim.fn.winrestview(saved_view)
+end
+
+-- Keymap for folding markdown headings of level 1 or above
+vim.keymap.set("n", "zh", function()
+  -- "Update" saves only if the buffer has been modified since the last save
+  vim.cmd("silent update")
+  -- vim.keymap.set("n", "<leader>mfj", function()
+  -- Reloads the file to refresh folds, otheriise you have to re-open neovim
+  vim.cmd("edit!")
+  -- Unfold everything first or I had issues
+  vim.cmd("normal! zR")
+  fold_markdown_headings({ 6, 5, 4, 3, 2, 1 })
+  vim.cmd("normal! zz") -- center the cursor line on screen
+end, { desc = "[P]Fold all headings level 1 or above" })
+
+-- Keymap for folding markdown headings of level 2 or above
+-- I know, it reads like "madafaka" but "k" for me means "2"
+vim.keymap.set("n", "zj", function()
+  -- "Update" saves only if the buffer has been modified since the last save
+  vim.cmd("silent update")
+  -- vim.keymap.set("n", "<leader>mfk", function()
+  -- Reloads the file to refresh folds, otherwise you have to re-open neovim
+  vim.cmd("edit!")
+  -- Unfold everything first or I had issues
+  vim.cmd("normal! zR")
+  fold_markdown_headings({ 6, 5, 4, 3, 2 })
+  vim.cmd("normal! zz") -- center the cursor line on screen
+end, { desc = "[P]Fold all headings level 2 or above" })
+
+-- Keymap for folding markdown headings of level 3 or above
+vim.keymap.set("n", "zk", function()
+  -- "Update" saves only if the buffer has been modified since the last save
+  vim.cmd("silent update")
+  -- vim.keymap.set("n", "<leader>mfl", function()
+  -- Reloads the file to refresh folds, otherwise you have to re-open neovim
+  vim.cmd("edit!")
+  -- Unfold everything first or I had issues
+  vim.cmd("normal! zR")
+  fold_markdown_headings({ 6, 5, 4, 3 })
+  vim.cmd("normal! zz") -- center the cursor line on screen
+end, { desc = "[P]Fold all headings level 3 or above" })
+
+-- Keymap for folding markdown headings of level 4 or above
+vim.keymap.set("n", "zl", function()
+  -- "Update" saves only if the buffer has been modified since the last save
+  vim.cmd("silent update")
+  -- vim.keymap.set("n", "<leader>mf;", function()
+  -- Reloads the file to refresh folds, otherwise you have to re-open neovim
+  vim.cmd("edit!")
+  -- Unfold everything first or I had issues
+  vim.cmd("normal! zR")
+  fold_markdown_headings({ 6, 5, 4 })
+  vim.cmd("normal! zz") -- center the cursor line on screen
+end, { desc = "[P]Fold all headings level 4 or above" })
+
 -- Use <CR> to fold when in normal mode
 -- To see help about folds use `:help fold`
 -- vim.keymap.set("n", "<CR>", function()
@@ -84,6 +179,8 @@ vim.keymap.set({ "n" }, "<Enter>", function()
   end
 end, { expr = true, replace_keycodes = true })
 vim.keymap.set({ "n" }, "<BS>", "zc")
+-- NOTE: Fold section: end
+--
 --
 -- NOTE: Terminal
 vim.keymap.set("", "H", "^")
@@ -124,6 +221,7 @@ vim.keymap.set("x", "<leader>dpp", "<cmd>'<,'>diffput<cr>")
 -- vim.keymap.set({ "t" }, "<esc>", "<c-\\><c-n>")
 vim.keymap.set({ "t" }, "<C-q>", "<c-\\><c-n>")
 vim.keymap.set({ "t" }, "<F1>", "<c-\\><c-n>")
+vim.keymap.set({ "n", "x", "i" }, "<F1>", "<ESC>")
 -- vim.keymap.set({ "t" }, "<F1>", "<esc>")
 -- vim.keymap.set({ "t" }, "<M-esc>", "<esc>")
 
@@ -175,7 +273,7 @@ vim.keymap.set({ "n", "v" }, "<leader>yl", function()
   local filepath = vim.fn.expand("%:.")
   local line_start = vim.fn.line(".")
   local result
-  
+
   if vim.fn.mode() == "v" or vim.fn.mode() == "V" then
     local line_end = vim.fn.line("v")
     if line_start > line_end then
@@ -185,7 +283,7 @@ vim.keymap.set({ "n", "v" }, "<leader>yl", function()
   else
     result = filepath .. " L" .. line_start
   end
-  
+
   vim.fn.setreg("+", result)
   print("Yanked: " .. result)
 end, { desc = "Yank path+line format" })
