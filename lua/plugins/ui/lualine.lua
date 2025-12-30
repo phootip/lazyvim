@@ -55,6 +55,7 @@ return {
       opts.options.disabled_filetypes = {
         winbar = {
           "snacks_dashboard",
+          "snacks_picker_list",
           "noice",
           "NvimTree",
           "Avante",
@@ -62,10 +63,10 @@ return {
           "AvanteSelectedFiles",
           "AvanteSelectedCode",
           -- kulala file
-          "text",
-          "json",
-          "html",
-          "kulala_verbose_result",
+          -- "text",
+          -- "json",
+          -- "html",
+          -- "kulala_verbose_result",
           "sidekick_terminal",
         },
       }
@@ -79,8 +80,8 @@ return {
       require("tabby.tabline").set(function(line)
         return {
           {
-            { "  ", hl = theme.head },
-            line.sep("", theme.head, theme.fill),
+            { vim.fn.system("tmux display-message -p '  #S'"):gsub("\n", "") .. " ", hl = "RenderMarkdownH1Bg" },
+            line.sep("", "RenderMarkdownH1Bg", theme.fill),
           },
           line.tabs().foreach(function(tab)
             -- local hl = tab.is_current() and theme.current_tab or theme.tab

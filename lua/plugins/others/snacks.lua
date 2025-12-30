@@ -86,16 +86,28 @@ return {
           },
         },
       },
+      styles = {
+        terminal = {
+          height = 0.8,
+          keys = {
+            term_normal = false,
+          },
+        },
+      },
     }
     for k, v in pairs(opts_override) do
       opts[k] = v
     end
     require("snacks").setup(opts)
+
     vim.api.nvim_set_hl(0, "SnacksPickerPathHidden", { link = "Comment" })
     vim.api.nvim_set_hl(0, "SnacksPickerPathIgnored", { link = "Comment" })
     vim.api.nvim_set_hl(0, "SnacksPickerDir", { link = "Comment" })
 
+    -- vim.api.nvim_del_keymap("t", "<Esc><Esc>")
+    -- vim.keymap.del("t", "<Esc><Esc>")
   end,
+-- stylua: ignore start
   keys = {
     { "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
     { "<leader>E", function() Snacks.explorer({ cwd = LazyVim.root() }) end, desc = "File Explorer (root)" },
@@ -129,5 +141,6 @@ return {
       end,
       desc = "[P]Search for incomplete tasks",
     },
+    {"<M-0>", function() Snacks.terminal(nil, { cwd = LazyVim.root() }) end, desc = "Terminal (Root Dir)", mode = {"n", "t"} },
   },
 }
