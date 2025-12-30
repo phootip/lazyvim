@@ -170,6 +170,26 @@ vim.keymap.set("n", "<leader>yd", function()
   print("Yanked: " .. dirpath)
 end, { desc = "Yank directory path relative to cwd" })
 
+-- yank path+line format
+vim.keymap.set({ "n", "v" }, "<leader>yl", function()
+  local filepath = vim.fn.expand("%:.")
+  local line_start = vim.fn.line(".")
+  local result
+  
+  if vim.fn.mode() == "v" or vim.fn.mode() == "V" then
+    local line_end = vim.fn.line("v")
+    if line_start > line_end then
+      line_start, line_end = line_end, line_start
+    end
+    result = filepath .. " L" .. line_start .. ":" .. line_end
+  else
+    result = filepath .. " L" .. line_start
+  end
+  
+  vim.fn.setreg("+", result)
+  print("Yanked: " .. result)
+end, { desc = "Yank path+line format" })
+
 -- mutlicusor
 vim.api.nvim_del_keymap("n", "<esc>")
 local mc = require("multicursor-nvim")

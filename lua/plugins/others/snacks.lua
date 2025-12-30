@@ -9,8 +9,8 @@ return {
               backdrop = false,
               row = 1,
               min_width = 80,
-              width = 0.9,
-              height = 0.9,
+              width = 0.95,
+              height = 0.95,
               -- border = "none",
               box = "vertical",
               { win = "preview", title = "{preview}", height = 0.6, border = "rounded" },
@@ -93,6 +93,8 @@ return {
     require("snacks").setup(opts)
     vim.api.nvim_set_hl(0, "SnacksPickerPathHidden", { link = "Comment" })
     vim.api.nvim_set_hl(0, "SnacksPickerPathIgnored", { link = "Comment" })
+    vim.api.nvim_set_hl(0, "SnacksPickerDir", { link = "Comment" })
+
   end,
   keys = {
     { "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
