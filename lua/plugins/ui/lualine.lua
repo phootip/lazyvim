@@ -80,7 +80,7 @@ return {
       require("tabby.tabline").set(function(line)
         return {
           {
-            { vim.fn.system("tmux display-message -p '  #S'"):gsub("\n", "") .. " ", hl = "RenderMarkdownH1Bg" },
+            { vim.fn.system("tmux display-message -p '  #S #I'"):gsub("\n", "") .. " ", hl = "RenderMarkdownH1Bg" },
             line.sep("", "RenderMarkdownH1Bg", theme.fill),
           },
           line.tabs().foreach(function(tab)
