@@ -6,12 +6,43 @@ vim.keymap.set("x", "P", "p")
 vim.keymap.set({ "n", "x" }, "x", '"_x')
 vim.keymap.set({ "n", "x" }, "X", '"_X')
 vim.keymap.set("n", "dx", '""dd')
-vim.keymap.set({ "n" }, "vil", "^vg_")
-vim.keymap.set({ "n" }, "yil", "^yg_")
-vim.keymap.set({ "n" }, "ci ", "ciW")
-vim.keymap.set({ "n" }, "vi ", "viW")
-vim.keymap.set({ "n" }, "yi ", "yiW")
-vim.keymap.set({ "n" }, "val", "0v$h")
+-- vim.keymap.set({ "o" }, "il", "^g_", { desc = "Inner line (non-blank)" })
+--
+-- NOTE: remap text-object, inline, inword
+vim.keymap.set({ "o" }, "i ", "iW", { desc = "Inner WORD" })
+local function select_il()
+  local line = vim.fn.line(".")
+
+  local col_start = vim.fn.match(vim.fn.getline(line), "\\S") + 1
+  if col_start == 0 then
+    col_start = 1
+  end
+
+  local col_end = vim.fn.matchend(vim.fn.getline(line), "\\s*$")
+  if col_end == 0 then
+    col_end = vim.fn.col("$") - 1
+  end
+
+  vim.fn.setpos("'<", { 0, line, col_start, 0 })
+  vim.fn.setpos("'>", { 0, line, col_end, 0 })
+  vim.cmd("normal! gv")
+end
+
+local function select_al()
+  local line = vim.fn.line(".")
+  local col_start = 1
+  local col_end = vim.fn.col("$") - 1
+
+  vim.fn.setpos("'<", { 0, line, col_start, 0 })
+  vim.fn.setpos("'>", { 0, line, col_end, 0 })
+  vim.cmd("normal! gv")
+end
+
+vim.keymap.set("x", "il", select_il, { desc = "inner line (^vg_)" })
+vim.keymap.set("x", "al", select_al, { desc = "around line (0v$h)" })
+vim.keymap.set("o", "il", select_il, { desc = "inner line (^vg_)" })
+vim.keymap.set("o", "al", select_al, { desc = "around line (0v$h)" })
+
 vim.keymap.set("n", "<c-_>", "gcc", { remap = true })
 vim.keymap.set("n", "<c-/>", "gcc", { remap = true })
 vim.keymap.set("v", "<C-_>", "gc", { remap = true })

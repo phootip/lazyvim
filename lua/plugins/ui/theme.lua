@@ -43,6 +43,7 @@ return {
       overrides = function(colors)
         return {
           Visual = { bg = "#083a5f" },
+          -- Visual = { bg = "#ff0000" },
           WinSeparator = { fg = "#A3D4D5" },
           Cursor = { bg = "#d466d8" },
           TermCursor = { bg = "#ff0000" },

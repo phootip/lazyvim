@@ -52,15 +52,25 @@ return {
           { emptyFile },
         },
       }
-      opts.sections = {
-        lualine_y = {
-          { "progress", separator = " |", padding = { left = 1, right = 0 } },
-          { "location", separator = "", padding = { left = 0, right = 1 } },
-        },
-        -- lualine_y = { { "progress", separator = "" }, { "location", separator = "" } },
-        lualine_z = {},
-      }
-      print(dump(opts.sections.lualine_z))
+
+      -- opts.sections = {
+      --   lualine_a = {
+      --     {
+      --       "mode",
+      --       fmt = function(str)
+      --         return str:sub(1, 1)
+      --       end,
+      --     },
+      --   },
+      --   -- lualine_y = {
+      --   --   { "progress", separator = " |", padding = { left = 1, right = 0 } },
+      --   --   { "location", separator = "", padding = { left = 0, right = 1 } },
+      --   -- },
+      --   -- lualine_y = { { "progress", separator = "" }, { "location", separator = "" } },
+      --   -- lualine_z = { "lsp_status", "searchcount" },
+      --   -- lualine_z = {},
+      -- }
+
       opts.options.disabled_filetypes = {
         winbar = {
           "snacks_dashboard",
