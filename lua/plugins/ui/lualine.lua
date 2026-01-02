@@ -32,30 +32,8 @@ return {
       -- component_separators = { left = '', right = ''},
       -- section_separators = { left = '', right = ''},
 
-      -- hide file name
-      opts.sections.lualine_c[4] = {}
-
-      -- too much trouble adjusting symbols
-      local trouble = require("trouble")
-      local symbols = trouble.statusline({
-        mode = "symbols",
-        groups = {},
-        title = false,
-        filter = { range = true },
-        format = "{kind_icon}{symbol.name:Normal} ",
-        hl_group = "lualine_c_normal",
-      })
-      opts.sections.lualine_c[5] = {
-        symbols.get,
-        cond = function()
-          return vim.b.trouble_lualine ~= false and symbols.has()
-        end,
-        separator = "",
-      }
       vim.api.nvim_set_hl(0, "StatusLine", { link = "lualine_c_normal" })
 
-      table.insert(opts.sections.lualine_x, "filetype")
-      table.insert(opts.sections.lualine_x, "fileformat")
       local custom_theme = require("lualine.themes.auto")
       custom_theme.terminal = {
         -- a = { fg = "#1F1F28", bg = "#e03450" },
@@ -86,6 +64,35 @@ return {
           end,
         },
       }
+
+      -- hide file name
+      opts.sections.lualine_c[4] = {}
+
+      -- disable symbols on statusline
+      opts.sections.lualine_c[5] = {}
+      -- too much trouble adjusting symbols
+      -- local trouble = require("trouble")
+      -- local symbols = trouble.statusline({
+      --   mode = "symbols",
+      --   groups = {},
+      --   title = false,
+      --   filter = { range = true },
+      --   format = "{kind_icon}{symbol.name:Normal} ",
+      --   hl_group = "lualine_c_normal",
+      -- })
+      -- opts.sections.lualine_c[5] = {
+      --   symbols.get,
+      --   cond = function()
+      --     return vim.b.trouble_lualine ~= false and symbols.has()
+      --   end,
+      --   separator = "",
+      -- }
+
+      opts.sections.lualine_c[4] = { "lsp_status" }
+
+      -- disable git diff, show lsp_status
+      opts.sections.lualine_x[6] = {}
+      --
       opts.sections.lualine_y = {
         { "progress", separator = "|" },
         { "location" },
