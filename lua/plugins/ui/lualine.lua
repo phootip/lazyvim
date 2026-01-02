@@ -26,9 +26,34 @@ return {
       { "otavioschwanck/arrow.nvim" },
     },
     opts = function(_, opts)
-      table.insert(opts.sections.lualine_b, function()
-        return require("arrow.statusline").text_for_statusline_with_icons()
-      end)
+      opts.options.component_separators = { left = "|", right = "|" }
+      opts.options.section_separators = { left = "", right = "" }
+
+      -- component_separators = { left = '', right = ''},
+      -- section_separators = { left = '', right = ''},
+
+      -- hide file name
+      opts.sections.lualine_c[4] = {}
+
+      -- too much trouble adjusting symbols
+      local trouble = require("trouble")
+      local symbols = trouble.statusline({
+        mode = "symbols",
+        groups = {},
+        title = false,
+        filter = { range = true },
+        format = "{kind_icon}{symbol.name:Normal} ",
+        hl_group = "lualine_c_normal",
+      })
+      opts.sections.lualine_c[5] = {
+        symbols.get,
+        cond = function()
+          return vim.b.trouble_lualine ~= false and symbols.has()
+        end,
+        separator = "",
+      }
+      vim.api.nvim_set_hl(0, "StatusLine", { link = "lualine_c_normal" })
+
       table.insert(opts.sections.lualine_x, "filetype")
       table.insert(opts.sections.lualine_x, "fileformat")
       local custom_theme = require("lualine.themes.auto")
@@ -53,23 +78,19 @@ return {
         },
       }
 
-      -- opts.sections = {
-      --   lualine_a = {
-      --     {
-      --       "mode",
-      --       fmt = function(str)
-      --         return str:sub(1, 1)
-      --       end,
-      --     },
-      --   },
-      --   -- lualine_y = {
-      --   --   { "progress", separator = " |", padding = { left = 1, right = 0 } },
-      --   --   { "location", separator = "", padding = { left = 0, right = 1 } },
-      --   -- },
-      --   -- lualine_y = { { "progress", separator = "" }, { "location", separator = "" } },
-      --   -- lualine_z = { "lsp_status", "searchcount" },
-      --   -- lualine_z = {},
-      -- }
+      opts.sections.lualine_a = {
+        {
+          "mode",
+          fmt = function(str)
+            return str:sub(1, 1)
+          end,
+        },
+      }
+      opts.sections.lualine_y = {
+        { "progress", separator = "|" },
+        { "location" },
+      }
+      opts.sections.lualine_z = {}
 
       opts.options.disabled_filetypes = {
         winbar = {
