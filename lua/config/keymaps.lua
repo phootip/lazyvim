@@ -1,6 +1,7 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
+-- NOTE: SECTION: Basic Remaps
 vim.keymap.set("x", "p", "P")
 vim.keymap.set("x", "P", "p")
 vim.keymap.set({ "n", "x" }, "x", '"_x')
@@ -8,7 +9,7 @@ vim.keymap.set({ "n", "x" }, "X", '"_X')
 vim.keymap.set("n", "dx", '""dd')
 -- vim.keymap.set({ "o" }, "il", "^g_", { desc = "Inner line (non-blank)" })
 --
--- NOTE: remap text-object, inline, inword
+-- NOTE: SECTION: Custom Text Objects
 vim.keymap.set({ "o" }, "i ", "iW", { desc = "Inner WORD" })
 local function select_il()
   local line = vim.fn.line(".")
@@ -43,11 +44,13 @@ vim.keymap.set("x", "al", select_al, { desc = "around line (0v$h)" })
 vim.keymap.set("o", "il", select_il, { desc = "inner line (^vg_)" })
 vim.keymap.set("o", "al", select_al, { desc = "around line (0v$h)" })
 
+-- NOTE: SECTION: Comment Toggling
 vim.keymap.set("n", "<c-_>", "gcc", { remap = true })
 vim.keymap.set("n", "<c-/>", "gcc", { remap = true })
 vim.keymap.set("v", "<C-_>", "gc", { remap = true })
 vim.keymap.set("v", "<C-/>", "gc", { remap = true })
 
+-- NOTE: SECTION: Join lines
 vim.keymap.set("v", "J", "gJ", { silent = true })
 vim.keymap.set("v", "gJ", "J", { silent = true })
 
@@ -56,7 +59,7 @@ vim.keymap.set("v", "gJ", "J", { silent = true })
 -- vim.keymap.set({ "n", "x", "i", "t" }, "<C-k>", "<CMD>TmuxNavigateUp<CR>", { silent = true })
 -- vim.keymap.set({ "n", "x", "i", "t" }, "<C-l>", "<CMD>TmuxNavigateRight<CR>", { silent = true })
 
--- tab switching
+-- NOTE: SECTION: Tab and Window Navigation
 vim.keymap.set({ "n", "x", "i" }, "<M-u>", "<cmd>tabp<cr>")
 vim.keymap.set({ "n", "x", "i" }, "<M-i>", "<cmd>tabn<cr>")
 vim.keymap.set({ "n", "x", "i", "t" }, "<M-h>", "<cmd>wincmd h<cr>")
@@ -68,7 +71,7 @@ vim.keymap.set({ "n", "x", "i", "t" }, "<M-6>", function()
   print("filetype: " .. vim.o.filetype)
 end)
 
--- NOTE: Terminal - switch terminal while keeping cursor pos
+-- NOTE: SECTION: Terminal Tab Navigation
 vim.keymap.set({ "t" }, "<M-u>", function()
   vim.cmd("stopinsert")
   -- using vim.cmd("tabp") breaks cursor pos, why?
@@ -86,7 +89,7 @@ vim.keymap.set({ "t" }, "<M-i>", function()
   end
 end)
 
--- NOTE: Fold section: start
+-- NOTE: SECTION: Fold
 -- Function to fold all headings of a specific level
 local function fold_headings_of_level(level)
   -- Move to the top of the file without adding to jumplist
@@ -210,10 +213,8 @@ vim.keymap.set({ "n" }, "<Enter>", function()
   end
 end, { expr = true, replace_keycodes = true })
 vim.keymap.set({ "n" }, "<BS>", "zc")
--- NOTE: Fold section: end
---
---
--- NOTE: Terminal
+
+-- NOTE: SECTION: Terminal
 vim.keymap.set("", "H", "^")
 vim.keymap.set("", "L", "g_")
 vim.keymap.set("n", "]<Tab>", "<cmd>tabnext<cr>")
@@ -226,12 +227,28 @@ vim.keymap.set("n", "<leader>tr", "<cmd>TabRename <cr>")
 -- vim.keymap.set("n", "<leader>t", function()
 --   require("which-key").show({ keys = "<leader>t", loop = true })
 -- end)
--- NOTE: UI
+
+-- NOTE: SECTION: Terminal Mode Escape
+vim.keymap.set({ "t" }, "<F1>", "<c-\\><c-n>")
+vim.keymap.set({ "n", "x", "i" }, "<F1>", "<ESC>")
+-- vim.keymap.set({ "t" }, "<F1>", "<esc>")
+-- vim.keymap.set({ "t" }, "<M-esc>", "<esc>")
+
+-- NOTE: SECTION: Quit Remap
+vim.keymap.set({ "n" }, "q", function()
+  if vim.bo.buftype == "terminal" then
+    vim.api.nvim_feedkeys("i", "n", true)
+  else
+    vim.api.nvim_feedkeys("q", "n", true)
+  end
+end)
+
+-- NOTE: SECTION: UI
 vim.keymap.del("n", "<leader>us")
 vim.keymap.set({ "n" }, "<leader>us", "<CMD>SmearCursorToggle<CR>", { silent = true, desc = "Toggle Smear Cursor" })
 
 -- vim.keymap.set("n", "<leader>.", "<cmd>@:<cr>")
--- NOTE: Diff
+-- NOTE: SECTION: Diff
 vim.keymap.set("n", "<leader>dd", function()
   if vim.wo.diff then
     vim.cmd("windo diffoff")
@@ -251,19 +268,8 @@ vim.keymap.set("x", "<leader>dpp", "<cmd>'<,'>diffput<cr>")
 -- vim.keymap.set({ "t" }, "<esc><esc>", "<c-\\><c-n>")
 -- vim.keymap.set({ "t" }, "<esc>", "<c-\\><c-n>")
 -- vim.keymap.set({ "t" }, "<C-q>", "<c-\\><c-n>")
-vim.keymap.set({ "t" }, "<F1>", "<c-\\><c-n>")
-vim.keymap.set({ "n", "x", "i" }, "<F1>", "<ESC>")
--- vim.keymap.set({ "t" }, "<F1>", "<esc>")
--- vim.keymap.set({ "t" }, "<M-esc>", "<esc>")
 
-vim.keymap.set({ "n" }, "q", function()
-  if vim.bo.buftype == "terminal" then
-    vim.api.nvim_feedkeys("i", "n", true)
-  else
-    vim.api.nvim_feedkeys("q", "n", true)
-  end
-end)
-
+-- NOTE: SECTION: Yank File/Path
 -- yank filename only
 vim.keymap.set("n", "<leader>yf", function()
   local filename = vim.fn.expand("%:t")
@@ -319,6 +325,7 @@ vim.keymap.set({ "n", "v" }, "<leader>yl", function()
   print("Yanked: " .. result)
 end, { desc = "Yank path+line format" })
 
+-- NOTE: SECTION: Multicursor
 -- mutlicusor
 vim.api.nvim_del_keymap("n", "<esc>")
 local mc = require("multicursor-nvim")
