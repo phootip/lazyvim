@@ -65,11 +65,8 @@ return {
         },
       }
 
-      -- hide file name
-      opts.sections.lualine_c[4] = {}
-
       -- disable symbols on statusline
-      opts.sections.lualine_c[5] = {}
+      table.remove(opts.sections.lualine_c, 5)
       -- too much trouble adjusting symbols
       -- local trouble = require("trouble")
       -- local symbols = trouble.statusline({
@@ -87,12 +84,13 @@ return {
       --   end,
       --   separator = "",
       -- }
+      -- hide file name
+      table.remove(opts.sections.lualine_c, 4)
+      table.insert(opts.sections.lualine_c, { "lsp_status" })
 
-      opts.sections.lualine_c[4] = { "lsp_status" }
-
-      -- disable git diff, show lsp_status
-      opts.sections.lualine_x[6] = {}
-      --
+      -- disable last command ,git diff
+      table.remove(opts.sections.lualine_x, 6)
+      table.remove(opts.sections.lualine_x, 2)
       opts.sections.lualine_y = {
         { "progress", separator = "|" },
         { "location" },
