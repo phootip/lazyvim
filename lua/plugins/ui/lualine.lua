@@ -64,6 +64,7 @@ return {
           end,
         },
       }
+      opts.sections.lualine_b = { { "branch", icons_enabled = false } }
 
       -- disable symbols on statusline
       table.remove(opts.sections.lualine_c, 5)

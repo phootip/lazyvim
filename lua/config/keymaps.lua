@@ -10,7 +10,7 @@ vim.keymap.set("n", "dx", '""dd')
 -- vim.keymap.set({ "o" }, "il", "^g_", { desc = "Inner line (non-blank)" })
 --
 -- NOTE: SECTION: Custom Text Objects
-vim.keymap.set({ "o" }, "i ", "iW", { desc = "Inner WORD" })
+vim.keymap.set({ "o", "x" }, "i ", "iW", { desc = "Inner WORD" })
 local function select_il()
   local line = vim.fn.line(".")
 
@@ -230,7 +230,8 @@ vim.keymap.set("n", "<leader>tr", "<cmd>TabRename <cr>")
 
 -- NOTE: SECTION: Terminal Mode Escape
 vim.keymap.set({ "t" }, "<F1>", "<c-\\><c-n>")
-vim.keymap.set({ "n", "x", "i" }, "<F1>", "<ESC>")
+vim.keymap.set({ "x", "i" }, "<F1>", "<ESC>")
+vim.keymap.set({ "n" }, "<F1>", "<CMD>noh<CR><ESC>")
 -- vim.keymap.set({ "t" }, "<F1>", "<esc>")
 -- vim.keymap.set({ "t" }, "<M-esc>", "<esc>")
 
