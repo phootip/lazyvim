@@ -272,7 +272,7 @@ vim.keymap.set("x", "<leader>dpp", "<cmd>'<,'>diffput<cr>")
 
 -- NOTE: SECTION: Yank File/Path
 -- yank filename only
-vim.keymap.set("n", "<leader>yf", function()
+vim.keymap.set("n", "<leader>yn", function()
   local filename = vim.fn.expand("%:t")
   vim.fn.setreg("+", filename)
   print("Yanked: " .. filename)
@@ -286,6 +286,12 @@ vim.keymap.set("n", "<leader>yF", function()
 end, { desc = "Yank file absolute path" })
 
 -- yank filepath relative to cwd
+vim.keymap.set("n", "<leader>yf", function()
+  local filepath = vim.fn.expand("%:.")
+  vim.fn.setreg("+", filepath)
+  print("Yanked: " .. filepath)
+end, { desc = "Yank filepath relative to cwd" })
+
 vim.keymap.set("n", "<leader>yp", function()
   local filepath = vim.fn.expand("%:.")
   vim.fn.setreg("+", filepath)
@@ -302,8 +308,8 @@ end, { desc = "Yank file absolute path" })
 -- yank directory path relative to cwd
 vim.keymap.set("n", "<leader>yd", function()
   local dirpath = vim.fn.expand("%:.:h")
-  vim.fn.setreg("+", dirpath)
-  print("Yanked: " .. dirpath)
+  vim.fn.setreg("+", dirpath .. "/")
+  print("Yanked: " .. dirpath .. "/")
 end, { desc = "Yank directory path relative to cwd" })
 
 -- yank path+line format

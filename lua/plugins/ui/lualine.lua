@@ -123,10 +123,12 @@ return {
     event = "VimEnter",
     dependencies = "nvim-tree/nvim-web-devicons",
     config = function()
+      -- precompoute tmux_info
+      local tmux_info = vim.fn.system("tmux display-message -p '  #S #I'"):gsub("\n", "") .. " "
       require("tabby.tabline").set(function(line)
         return {
           {
-            { vim.fn.system("tmux display-message -p '  #S #I'"):gsub("\n", "") .. " ", hl = "RenderMarkdownH1Bg" },
+            { tmux_info, hl = "RenderMarkdownH1Bg" },
             line.sep("", "RenderMarkdownH1Bg", theme.fill),
           },
           line.tabs().foreach(function(tab)
