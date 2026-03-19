@@ -323,14 +323,57 @@ vim.keymap.set({ "n", "v" }, "<leader>yl", function()
     if line_start > line_end then
       line_start, line_end = line_end, line_start
     end
-    result = filepath .. " L" .. line_start .. ":" .. line_end
+    result = filepath .. " :L" .. line_start .. "-L" .. line_end
   else
-    result = filepath .. " L" .. line_start
+    result = filepath .. " :L" .. line_start
   end
 
   vim.fn.setreg("+", result)
   print("Yanked: " .. result)
 end, { desc = "Yank path+line format" })
+
+-- yank path+position/selection format
+vim.keymap.set({ "n", "v" }, "<leader>yt", function()
+  local filepath = vim.fn.expand("%:.")
+  local m = vim.fn.mode()
+  local result = ""
+
+  -- Try to get visual selection positions
+  local pos1 = vim.fn.getpos("'<")
+  local pos2 = vim.fn.getpos("'>")
+  local l1, c1 = pos1[2], pos1[3]
+  local l2, c2 = pos2[2], pos2[3]
+
+  -- If positions are invalid (0), or not in visual mode, use cursor position
+  if l1 == 0 or l2 == 0 or m == "n" then
+    local cur = vim.api.nvim_win_get_cursor(0)
+    local line = cur[1]
+    local col = cur[2] + 1
+    result = filepath .. " :L" .. line .. ":C" .. col
+  else
+    -- Visual modes - positions are valid
+    if l1 > l2 or (l1 == l2 and c1 > c2) then
+      l1, l2 = l2, l1
+      c1, c2 = c2, c1
+    end
+
+    if m == "V" then
+      -- Linewise visual: show lines range
+      result = filepath .. " :L" .. l1 .. "-L" .. l2
+    else
+      -- Characterwise (including block); show cols when on same line, else show full start/end with cols
+      if l1 == l2 then
+        result = filepath .. " :L" .. l1 .. ":C" .. c1 .. "-C" .. c2
+      else
+        -- For multi-line selection, avoid showing sentinel value (2147483647) for end column
+        result = filepath .. " :L" .. l1 .. ":C" .. c1 .. "-L" .. l2
+      end
+    end
+  end
+
+  vim.fn.setreg("+", result)
+  print("Yanked: " .. result)
+end, { desc = "Yank file path with cursor or selection position" })
 
 -- NOTE: SECTION: Multicursor
 -- mutlicusor

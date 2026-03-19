@@ -23,3 +23,8 @@ end
 
 local lualine = require("lualine")
 print(dump(lualine))
+local copilot = require("copilot.config").suggestion.auto_trigger
+print(dump(copilot))
+
+local tabby = require("tabby")
+print(dump(tabby))

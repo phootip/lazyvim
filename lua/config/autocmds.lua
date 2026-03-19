@@ -53,17 +53,17 @@ vim.api.nvim_create_autocmd("BufEnter", {
 --   end,
 -- })
 
-vim.api.nvim_create_autocmd("TextChangedT", {
+vim.api.nvim_create_autocmd("BufEnter", {
   callback = function()
     local is_gemini = vim.b.term_title and vim.b.term_title:find("^Gemini")
-    local maps_set = vim.b.gemini_maps_set
+    local is_copilot = vim.fn.expand("%:t"):find("^copilot")
 
-    if is_gemini and not maps_set then
+    if is_gemini then
       vim.api.nvim_buf_set_keymap(0, "t", "<F2>", "<C-x>", { silent = true })
-      vim.b.gemini_maps_set = true
-    elseif not is_gemini and maps_set then
-      vim.api.nvim_buf_del_keymap(0, "t", "<F2>")
-      vim.b.gemini_maps_set = false
+    elseif is_copilot then
+      vim.api.nvim_buf_set_keymap(0, "t", "<F2>", "<C-g>", { silent = true })
+    else
+      pcall(vim.api.nvim_buf_del_keymap, 0, "t", "<F2>")
     end
   end,
 })
