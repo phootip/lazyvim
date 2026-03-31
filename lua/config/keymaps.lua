@@ -41,8 +41,12 @@ end
 
 vim.keymap.set("x", "il", select_il, { desc = "inner line (^vg_)" })
 vim.keymap.set("x", "al", select_al, { desc = "around line (0v$h)" })
-vim.keymap.set("o", "il", select_il, { desc = "inner line (^vg_)" })
-vim.keymap.set("o", "al", select_al, { desc = "around line (0v$h)" })
+vim.keymap.set("o", "il", function()
+  vim.cmd("normal! ^vg_")
+end, { desc = "inner line (^vg_)" })
+vim.keymap.set("o", "al", function()
+  vim.cmd("normal! 0v$h")
+end, { desc = "around line (0v$h)" })
 
 -- NOTE: SECTION: Comment Toggling
 vim.keymap.set("n", "<c-_>", "gcc", { remap = true })
