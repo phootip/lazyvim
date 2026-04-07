@@ -112,7 +112,7 @@ return {
     { "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
     { "<leader>E", function() Snacks.explorer({ cwd = LazyVim.root() }) end, desc = "File Explorer (root)" },
     { "<leader><space>", LazyVim.pick("live_grep", { root = false, hidden = true }), desc = "Grep (cwd)" },
-    { "<leader>ff", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
+    { "<leader>ff", LazyVim.pick("files", { root = false, hidden = true }), desc = "Find Files (cwd)" },
     {
       "<leader>nt",
       function()

@@ -4,6 +4,12 @@
 vim.opt.cursorcolumn = true
 -- vim.opt.wrap = true
 vim.opt.scrolloff = 999
+
+vim.keymap.set("n", "<leader>uo", function()
+  local current = vim.opt.scrolloff:get()
+  vim.opt.scrolloff = current == 999 and 8 or 999
+  vim.notify("scrolloff = " .. vim.opt.scrolloff:get())
+end, { desc = "Toggle scrolloff (999/8)" })
 vim.opt.sidescrolloff = 0
 vim.opt.showtabline = 2
 -- vim.opt.conceallevel = 0

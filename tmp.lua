@@ -11,3 +11,6 @@ local fibonacci = function()
 
   return fib
 end
+
+print(dump(vim.fn.getreginfo("+")))
+print(dump(vim.fn.getreginfo('"')))
