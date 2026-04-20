@@ -43,7 +43,7 @@ return {
             cmd = { "gemini", "-m", "gemini-2.5-flash" },
           },
           amazon_q = {
-            cmd = { "kiro-cli" },
+            cmd = { "kiro-cli", "--agent", "c" },
           },
         },
       },
