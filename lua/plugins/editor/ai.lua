@@ -45,6 +45,20 @@ return {
           amazon_q = {
             cmd = { "kiro-cli", "--agent", "c" },
           },
+          kiro = {
+            cmd = { "kiro-cli", "--agent", "c" },
+            -- format = function(text)
+            --   local Text = require("sidekick.text")
+            --   for _, line in ipairs(text) do
+            --     for i = #line, 1, -1 do
+            --       if line[i][1] == "@" and line[i][2] == "SidekickLocDelim" then
+            --         table.remove(line, i)
+            --       end
+            --     end
+            --   end
+            --   return Text.to_string(text)
+            -- end,
+          },
         },
       },
     },

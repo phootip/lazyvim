@@ -75,6 +75,15 @@ vim.keymap.set({ "n", "x", "i", "t" }, "<M-6>", function()
   print("filetype: " .. vim.o.filetype)
 end)
 
+-- NOTE: SECTION: Window Resizing
+vim.keymap.set({ "n", "x" }, "<leader>ww", function()
+  require("which-key").show({ keys = "<leader>w", loop = true })
+end, { desc = "Show window management keybindings" })
+vim.keymap.set({ "n", "x" }, "<leader>wh", "<cmd>vertical resize -2<cr>")
+vim.keymap.set({ "n", "x" }, "<leader>wl", "<cmd>vertical resize +2<cr>")
+vim.keymap.set({ "n", "x" }, "<leader>wk", "<cmd>resize -2<cr>")
+vim.keymap.set({ "n", "x" }, "<leader>wj", "<cmd>resize +2<cr>")
+
 -- NOTE: SECTION: Terminal Tab Navigation
 vim.keymap.set({ "t" }, "<M-u>", function()
   vim.cmd("stopinsert")
