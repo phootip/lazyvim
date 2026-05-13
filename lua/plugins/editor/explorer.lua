@@ -1,4 +1,4 @@
-local show_gitignore = false
+local show_gitignore = true
 local sort_hide = function(entries)
   -- technically can filter entries here too, and checking gitignore for _every entry individually_
   -- like I would have to in `content.filter` above is too slow. Here we can give it _all_ the entries
