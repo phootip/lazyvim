@@ -53,20 +53,22 @@ vim.api.nvim_create_autocmd("BufEnter", {
 --   end,
 -- })
 
-vim.api.nvim_create_autocmd("BufEnter", {
-  callback = function()
-    local is_gemini = vim.fn.expand("%:t"):find("^gemini")
-    local is_copilot = vim.fn.expand("%:t"):find("^copilot")
-    local is_qwen = vim.fn.expand("%:t"):find("^qwen")
+local f2_map = {
+  gemini = "<C-x>",
+  qwen = "<C-x>",
+  copilot = "<C-g>",
+}
 
-    if is_gemini then
-      vim.api.nvim_buf_set_keymap(0, "t", "<F2>", "<C-x>", { silent = true })
-    elseif is_qwen then
-      vim.api.nvim_buf_set_keymap(0, "t", "<F2>", "<C-x>", { silent = true })
-    elseif is_copilot then
-      vim.api.nvim_buf_set_keymap(0, "t", "<F2>", "<C-g>", { silent = true })
-    else
-      pcall(vim.api.nvim_buf_del_keymap, 0, "t", "<F2>")
+vim.api.nvim_create_autocmd("TermOpen", {
+  callback = function(args)
+    local name = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(args.buf), ":t")
+    local key = name:match("^(%w+)")
+    local rhs = key and f2_map[key]
+    if rhs then
+      vim.keymap.set("t", "<F2>", rhs, { buffer = args.buf, silent = true })
+    end
+    if key == "claude" then
+      vim.keymap.set("t", "<C-d>", "<F12>", { buffer = args.buf, silent = true })
     end
   end,
 })

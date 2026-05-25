@@ -1,4 +1,27 @@
 local show_gitignore = true
+
+local projects = {
+  lazyvim = {
+    dir = "/Users/phootip.t.extbankx.live/.config/lazyvim",
+    allowed = { ["lua"] = true, ["init.lua"] = true },
+  },
+}
+
+local project = projects[vim.g.project]
+local target_dir = project and vim.fn.fnamemodify(project.dir, ":p"):gsub("/$", "") or ""
+local allowed = project and project.allowed or {}
+
+if project and vim.g.mini_files_focus == nil then
+  vim.g.mini_files_focus = true
+end
+
+local focus_filter = function(entry)
+  local parent = vim.fn.fnamemodify(entry.path, ":h")
+  if parent == target_dir then
+    return allowed[entry.name] == true
+  end
+  return true
+end
 local sort_hide = function(entries)
   -- technically can filter entries here too, and checking gitignore for _every entry individually_
   -- like I would have to in `content.filter` above is too slow. Here we can give it _all_ the entries
@@ -37,6 +60,11 @@ local sort_hide = function(entries)
     :totable())
 end
 
+local toggle_filter = function()
+  vim.g.mini_files_focus = not vim.g.mini_files_focus
+  require("mini.files").refresh({ content = { filter = require("mini.files").config.content.filter } })
+end
+
 local toggle_gitignore = function()
   show_gitignore = not show_gitignore
   if show_gitignore then
@@ -60,7 +88,22 @@ return {
         use_as_default_explorer = false,
       },
       content = {
-        prefix = nil,
+        prefix = function(entry)
+          local icon, hl = require("mini.files").default_prefix(entry)
+          if not vim.g.mini_files_focus then
+            local parent = vim.fn.fnamemodify(entry.path, ":h")
+            if parent == target_dir and allowed[entry.name] then
+              return icon .. "** ", hl
+            end
+          end
+          return icon, hl
+        end,
+        filter = function(entry)
+          if vim.g.mini_files_focus then
+            return focus_filter(entry)
+          end
+          return true
+        end,
       },
       mappings = {
         go_in = "",
@@ -78,6 +121,14 @@ return {
         callback = function(args)
           local buf_id = args.data.buf_id
           vim.keymap.set("n", "gh", toggle_gitignore, { buffer = buf_id })
+          vim.keymap.set("n", "gf", toggle_filter, { buffer = buf_id })
+          vim.keymap.set("n", "ga", function()
+            local entry = require("mini.files").get_fs_entry()
+            if entry then
+              allowed[entry.name] = not allowed[entry.name] or nil
+              require("mini.files").refresh({ content = { filter = require("mini.files").config.content.filter } })
+            end
+          end, { buffer = buf_id })
         end,
       })
 
