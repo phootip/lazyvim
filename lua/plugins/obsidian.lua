@@ -1,3 +1,4 @@
+-- return {}
 -- NOTE: note taking
 vim.api.nvim_create_user_command("ObsidianNewDefaultTemplate", function()
   vim.cmd("ObsidianNew")

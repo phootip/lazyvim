@@ -101,7 +101,30 @@ return {
       {
         "<leader>af",
         function()
-          require("sidekick.cli").send({ msg = "{file}" })
+          local path
+          local ft = vim.bo.filetype
+          if ft == "snacks_picker_list" then
+            local pickers = Snacks.picker.get({ source = "explorer" })
+            local picker = pickers and pickers[1]
+            if picker then
+              local item = picker:current()
+              if item and item.file then
+                path = item.file
+              end
+            end
+          elseif ft == "minifiles" then
+            local entry = require("mini.files").get_fs_entry()
+            if entry then
+              path = entry.path
+            end
+          end
+          if path then
+            -- require("sidekick.cli").send({ msg = "@" .. vim.fn.fnamemodify(path, ":."), focus = false })
+            require("sidekick.cli").send({ msg = "@" .. vim.fn.fnamemodify(path, ":.") })
+          else
+            -- require("sidekick.cli").send({ msg = "{file}", focus = false })
+            require("sidekick.cli").send({ msg = "{file}" })
+          end
         end,
         desc = "Send File",
       },
