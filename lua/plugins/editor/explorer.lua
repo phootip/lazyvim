@@ -1,17 +1,42 @@
+-- NOTE: creating project
+-- nvim --cmd "let g:project='cluster'"
+-- ~/.local/share/nvim/mini_files_focus/cluster.json
+
 local show_gitignore = true
 
-local projects = {
-  lazyvim = {
-    dir = "/Users/phootip.t.extbankx.live/.config/lazyvim",
-    allowed = { ["lua"] = true, ["init.lua"] = true },
-  },
-}
+local target_dir = vim.g.project and vim.fn.fnamemodify(vim.fn.getcwd(), ":p"):gsub("/$", "") or ""
+local allowed = {}
 
-local project = projects[vim.g.project]
-local target_dir = project and vim.fn.fnamemodify(project.dir, ":p"):gsub("/$", "") or ""
-local allowed = project and project.allowed or {}
+local persist_path = nil
+if vim.g.project then
+  local dir = vim.fn.stdpath("data") .. "/mini_files_focus"
+  vim.fn.mkdir(dir, "p")
+  persist_path = dir .. "/" .. vim.g.project .. ".json"
+  local f = io.open(persist_path, "r")
+  if f then
+    local content = f:read("*a")
+    f:close()
+    local ok, data = pcall(vim.json.decode, content)
+    if ok and type(data) == "table" then
+      for k, v in pairs(data) do
+        allowed[k] = v
+      end
+    end
+  end
+end
 
-if project and vim.g.mini_files_focus == nil then
+local save_allowed = function()
+  if not persist_path then
+    return
+  end
+  local f = io.open(persist_path, "w")
+  if f then
+    f:write(vim.json.encode(allowed))
+    f:close()
+  end
+end
+
+if vim.g.project and vim.g.mini_files_focus == nil and next(allowed) ~= nil then
   vim.g.mini_files_focus = true
 end
 
@@ -117,6 +142,31 @@ return {
       require("mini.files").setup(opts)
 
       vim.api.nvim_create_autocmd("User", {
+        pattern = "MiniFilesWindowUpdate",
+        callback = function(args)
+          local win_id = args.data.win_id
+          local config = vim.api.nvim_win_get_config(win_id)
+          if not config.title then
+            return
+          end
+          local title = type(config.title) == "table" and config.title[1][1] or config.title
+          title = title:gsub("%s%[[FG ]*%]$", "")
+          local parts = {}
+          if vim.g.mini_files_focus then
+            table.insert(parts, "F")
+          end
+          if show_gitignore then
+            table.insert(parts, "G")
+          end
+          if #parts > 0 then
+            title = title .. " [" .. table.concat(parts, " ") .. "]"
+          end
+          config.title = title
+          vim.api.nvim_win_set_config(win_id, config)
+        end,
+      })
+
+      vim.api.nvim_create_autocmd("User", {
         pattern = "MiniFilesBufferCreate",
         callback = function(args)
           local buf_id = args.data.buf_id
@@ -126,6 +176,7 @@ return {
             local entry = require("mini.files").get_fs_entry()
             if entry then
               allowed[entry.name] = not allowed[entry.name] or nil
+              save_allowed()
               require("mini.files").refresh({ content = { filter = require("mini.files").config.content.filter } })
             end
           end, { buffer = buf_id })
