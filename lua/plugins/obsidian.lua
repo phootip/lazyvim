@@ -1,9 +1,9 @@
 -- return {}
 -- NOTE: note taking
 vim.api.nvim_create_user_command("ObsidianNewDefaultTemplate", function()
-  vim.cmd("ObsidianNew")
+  vim.cmd("Obsidian new")
   vim.cmd("normal! ggO") -- add properties at the start
-  vim.cmd("ObsidianTemplate default.md")
+  vim.cmd("Obsidian template default.md")
   vim.cmd("normal! ddG") -- go to end of file
 end, {})
 
@@ -60,7 +60,7 @@ local function openRepoNote()
   if f == 0 then
     vim.api.nvim_buf_set_name(repo_note_buf, file_location)
     vim.cmd("normal! ggO") -- add properties at the start
-    vim.cmd("ObsidianTemplate repo.md")
+    vim.cmd("Obsidian template repo.md")
     vim.cmd("normal! ddG") -- go to end of file
     vim.api.nvim_set_current_line("# " .. file_name)
     vim.cmd("normal! o") -- go to end of file
@@ -97,29 +97,32 @@ return {
     },
     notes_subdir = "1 inbox",
     new_notes_location = "notes_subdir",
+    legacy_commands = false,
     note_id_func = function(title)
       if title ~= nil then
         return title
       end
     end,
-    disable_frontmatter = true,
-    note_frontmatter_func = function(note)
-      local output = { tags = note.tags }
-      output["createdAt"] = tostring(os.date("%Y-%m-%dT%H:%M:%S%Z:00"))
-      if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
-        for k, v in pairs(note.metadata) do
-          output[k] = v
+    frontmatter = {
+      enabled = false,
+      func = function(note)
+        local output = { tags = note.tags }
+        output["createdAt"] = tostring(os.date("%Y-%m-%dT%H:%M:%S%Z:00"))
+        if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
+          for k, v in pairs(note.metadata) do
+            output[k] = v
+          end
         end
-      end
-      return output
-    end,
+        return output
+      end,
+    },
     completion = {
       blink = true, -- if not set, might have issue with lazy loading
       min_chars = 0,
     },
   },
   keys = {
-    { "<leader>nd", "<CMD>ObsidianToday<CR>", silent = true, mode = { "n" }, desc = "Today note" },
+    { "<leader>nd", "<CMD>Obsidian today<CR>", silent = true, mode = { "n" }, desc = "Today note" },
     { "<leader>nn", "<CMD>ObsidianNewDefaultTemplate<CR>", silent = true, mode = { "n" }, desc = "Today note" },
     { "<leader>nr", openRepoNote, silent = true, mode = { "n" }, desc = "Open Repo Note" },
     { "<M-n>", openRepoNote, silent = true, mode = { "n", "t" }, desc = "Open Repo Note" },
