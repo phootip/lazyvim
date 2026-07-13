@@ -45,6 +45,9 @@ return {
           amazon_q = {
             cmd = { "kiro-cli", "--agent", "c" },
           },
+          antigravity = {
+            cmd = { "agy", "-c" },
+          },
           kiro = {
             cmd = { "kiro-cli", "--agent", "c" },
             -- format = function(text)
