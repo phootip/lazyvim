@@ -292,35 +292,55 @@ vim.keymap.set("n", "<leader>yn", function()
 end, { desc = "Yank filename only" })
 
 -- yank file absolute path
-vim.keymap.set("n", "<leader>yF", function()
-  local filepath = vim.fn.expand("%:p")
+local function get_current_filepath(expand_cmd)
+  local filetypes = { "minifiles", "mini.files" }
+  local is_mini = vim.tbl_contains(filetypes, vim.bo.filetype) or vim.b.minifiles_id ~= nil
+
+  if is_mini then
+    local ok, mini_files = pcall(require, "mini.files")
+    if ok and mini_files.get_fs_entry then
+      local entry = mini_files.get_fs_entry()
+      if entry and entry.path then
+        local raw = entry.path:gsub("^minifiles://%d+/", "")
+        return vim.fn.fnamemodify(raw, expand_cmd)
+      end
+    end
+  end
+
+  local path = vim.fn.expand("%" .. (expand_cmd or ""))
+  path = path:gsub("^minifiles://%d+/", "")
+  return path
+end
+
+vim.keymap.set("n", "<leader>yf", function()
+  local filepath = get_current_filepath(":p")
   vim.fn.setreg("+", filepath)
   print("Yanked: " .. filepath)
 end, { desc = "Yank file absolute path" })
 
 -- yank filepath relative to cwd
-vim.keymap.set("n", "<leader>yf", function()
-  local filepath = vim.fn.expand("%:.")
+vim.keymap.set("n", "<leader>yF", function()
+  local filepath = get_current_filepath(":.")
   vim.fn.setreg("+", filepath)
   print("Yanked: " .. filepath)
 end, { desc = "Yank filepath relative to cwd" })
 
 vim.keymap.set("n", "<leader>yp", function()
-  local filepath = vim.fn.expand("%:.")
+  local filepath = get_current_filepath(":.")
   vim.fn.setreg("+", filepath)
   print("Yanked: " .. filepath)
 end, { desc = "Yank filepath relative to cwd" })
 
 -- yank file absolute path
 vim.keymap.set("n", "<leader>yP", function()
-  local filepath = vim.fn.expand("%:p")
+  local filepath = get_current_filepath(":p")
   vim.fn.setreg("+", filepath)
   print("Yanked: " .. filepath)
 end, { desc = "Yank file absolute path" })
 
 -- yank directory path relative to cwd
 vim.keymap.set("n", "<leader>yd", function()
-  local dirpath = vim.fn.expand("%:.:h")
+  local dirpath = get_current_filepath(":.:h")
   vim.fn.setreg("+", dirpath .. "/")
   print("Yanked: " .. dirpath .. "/")
 end, { desc = "Yank directory path relative to cwd" })
@@ -345,9 +365,8 @@ vim.keymap.set({ "n", "v" }, "<leader>yl", function()
   print("Yanked: " .. result)
 end, { desc = "Yank path+line format" })
 
--- yank path+position/selection format
-vim.keymap.set({ "n", "v" }, "<leader>yt", function()
-  local filepath = vim.fn.expand("%:.")
+local function yank_path_with_position(expand_cmd)
+  local filepath = get_current_filepath(expand_cmd)
   local m = vim.fn.mode()
   local result = ""
 
@@ -386,7 +405,17 @@ vim.keymap.set({ "n", "v" }, "<leader>yt", function()
 
   vim.fn.setreg("+", result)
   print("Yanked: " .. result)
-end, { desc = "Yank file path with cursor or selection position" })
+end
+
+-- yank path+position/selection format (relative path)
+vim.keymap.set({ "n", "v" }, "<leader>yT", function()
+  yank_path_with_position(":.")
+end, { desc = "Yank file relative path with cursor or selection position" })
+
+-- yank path+position/selection format (absolute path)
+vim.keymap.set({ "n", "v" }, "<leader>yt", function()
+  yank_path_with_position(":p")
+end, { desc = "Yank file absolute path with cursor or selection position" })
 
 -- NOTE: SECTION: Multicursor
 -- mutlicusor

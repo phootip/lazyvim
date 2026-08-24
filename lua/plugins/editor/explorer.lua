@@ -180,6 +180,50 @@ return {
               require("mini.files").refresh({ content = { filter = require("mini.files").config.content.filter } })
             end
           end, { buffer = buf_id })
+
+          local get_entry_path = function()
+            local entry = require("mini.files").get_fs_entry()
+            if entry and entry.path then
+              return entry.path:gsub("^minifiles://%d+/", "")
+            end
+            local line_content = vim.api.nvim_get_current_line()
+            if line_content and line_content ~= "" then
+              local clean_line = line_content:gsub("^%s*%f[%w_.]*(.-)%s*$", "%1")
+              if clean_line ~= "" then
+                local buf_name = vim.api.nvim_buf_get_name(0)
+                local dir = buf_name:gsub("^minifiles://%d+/", "")
+                return vim.fn.simplify(dir .. "/" .. clean_line)
+              end
+            end
+            return nil
+          end
+
+          -- Copy relative path (yf, yp, yy)
+          local copy_rel = function()
+            local path = get_entry_path()
+            if path then
+              local relpath = vim.fn.fnamemodify(path, ":.")
+              vim.fn.setreg("+", relpath)
+              vim.fn.setreg('"', relpath)
+              print("Yanked: " .. relpath)
+            end
+          end
+
+          -- Copy absolute path (yF, yP)
+          local copy_abs = function()
+            local path = get_entry_path()
+            if path then
+              local abspath = vim.fn.fnamemodify(path, ":p")
+              vim.fn.setreg("+", abspath)
+              vim.fn.setreg('"', abspath)
+              print("Yanked: " .. abspath)
+            end
+          end
+
+          vim.keymap.set("n", "yf", copy_rel, { buffer = buf_id, desc = "Yank entry relative path" })
+          vim.keymap.set("n", "yp", copy_rel, { buffer = buf_id, desc = "Yank entry relative path" })
+          vim.keymap.set("n", "yF", copy_abs, { buffer = buf_id, desc = "Yank entry absolute path" })
+          vim.keymap.set("n", "yP", copy_abs, { buffer = buf_id, desc = "Yank entry absolute path" })
         end,
       })
 
