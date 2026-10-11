@@ -72,12 +72,12 @@ return {
           -- },
         },
       })
-      vim.api.nvim_set_hl(0, "RenderMarkdownH1Bg", { fg = "#333333", bg = "#eb5e28" })
-      vim.api.nvim_set_hl(0, "RenderMarkdownH2Bg", { fg = "#333333", bg = "#f9a03f" })
-      vim.api.nvim_set_hl(0, "RenderMarkdownH3Bg", { fg = "#333333", bg = "#f3c053" })
-      vim.api.nvim_set_hl(0, "RenderMarkdownH4Bg", { fg = "#333333", bg = "#a1c349" })
-      vim.api.nvim_set_hl(0, "RenderMarkdownH5Bg", { fg = "#333333", bg = "#87a330" })
-      vim.api.nvim_set_hl(0, "RenderMarkdownH6Bg", { fg = "#333333", bg = "#6a8532" })
+      vim.api.nvim_set_hl(0, "RenderMarkdownH1Bg", { fg = "#ffffff", bg = "#6b4f9a" })
+      vim.api.nvim_set_hl(0, "RenderMarkdownH2Bg", { fg = "#ffffff", bg = "#5c3f8a" })
+      vim.api.nvim_set_hl(0, "RenderMarkdownH3Bg", { fg = "#ffffff", bg = "#4d3573" })
+      vim.api.nvim_set_hl(0, "RenderMarkdownH4Bg", { fg = "#ffffff", bg = "#3b5ea6" })
+      vim.api.nvim_set_hl(0, "RenderMarkdownH5Bg", { fg = "#ffffff", bg = "#2f4b7a" })
+      vim.api.nvim_set_hl(0, "RenderMarkdownH6Bg", { fg = "#ffffff", bg = "#263a5f" })
     end,
   },
 }
