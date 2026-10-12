@@ -48,6 +48,9 @@ return {
           antigravity = {
             cmd = { "agy", "-c" },
           },
+          omp = {
+            cmd = { "omp" },
+          },
           kiro = {
             cmd = { "kiro-cli", "--agent", "c" },
             -- format = function(text)
