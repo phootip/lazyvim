@@ -212,9 +212,27 @@ end, { desc = "[P]Fold all headings level 4 or above" })
 --   end
 -- end, { desc = "[P]Toggle fold" })
 
--- old: unfold next foldable
+-- URLs under cursor (plain URL, markdown link, LSP document link); same detection as `gx`
+local function urls_under_cursor()
+  local candidates = vim.ui._get_urls and vim.ui._get_urls() or { vim.fn.expand("<cfile>") }
+  return vim.tbl_filter(function(u)
+    return u:match("^%a[%w+.-]*://") ~= nil or u:match("^mailto:") ~= nil
+  end, candidates)
+end
+
+-- <Enter>: open link under cursor, else unfold next foldable
 vim.keymap.set({ "n" }, "<Enter>", function()
   if vim.o.buftype ~= "quickfix" and vim.o.filetype ~= "vim" then
+    local urls = urls_under_cursor()
+    if #urls > 0 then
+      -- expr mappings run under textlock; open outside it
+      vim.schedule(function()
+        for _, url in ipairs(urls) do
+          vim.ui.open(url)
+        end
+      end)
+      return "<Ignore>"
+    end
     local line = vim.fn.line(".")
     if vim.fn.foldclosed(line) ~= -1 then
       return "zo"
@@ -237,6 +255,8 @@ vim.keymap.set("n", "<leader>tn", "<cmd>tabnew<cr>")
 vim.keymap.set("n", "<leader>td", "<cmd>tabclose<cr>")
 vim.keymap.set("n", "<leader>to", "<cmd>tabonly<cr>")
 vim.keymap.set("n", "<leader>tr", "<cmd>TabRename <cr>")
+vim.keymap.set("n", "<leader>th", "<cmd>silent! -tabmove<cr>", { desc = "Move tab left" })
+vim.keymap.set("n", "<leader>tl", "<cmd>silent! +tabmove<cr>", { desc = "Move tab right" })
 -- vim.keymap.set("n", "<leader>t", function()
 --   require("which-key").show({ keys = "<leader>t", loop = true })
 -- end)
